@@ -7,7 +7,6 @@
 
 package com.hlbbs.service;
 
-import java.sql.Connection;
 import com.hlbbs.dao.DBOperator;;
 
 public class UserService {

@@ -12,8 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javafx.scene.layout.RowConstraints;
-
 public class DBOperator {
 	private Connection conn = null;
 	private Statement stmt = null;
