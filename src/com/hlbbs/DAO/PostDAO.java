@@ -133,7 +133,7 @@ public class PostDAO extends DAO {
 	 * @return
 	 */
 	public Post searchById() {
-		String sql="select * from t_hlbbs_posts where nvcSectionId=?";
+		String sql="select * from t_hlbbs_posts where intSectionId=?";
 		try {
 			pStatement=m_con.prepareStatement(sql);
 			pStatement.setInt(1, post.getSectionID());
@@ -142,12 +142,12 @@ public class PostDAO extends DAO {
 			if (rSet.next()) {
 				post.setId(rSet.getInt("id"));
 				post.setTitle(rSet.getString("nvcTitle"));
-				post.setPostMan(rSet.getString("nvcPostman"));
+				post.setPostMan(rSet.getString("intPostman"));
 				post.setContent(rSet.getString("nvcContent"));
 				post.setPostTime(rSet.getString("dtmPostTime"));
 				post.setFinalReplyTime(rSet.getString("dtmFinalReplyTime"));
 				post.setReplyCount(rSet.getInt("intReplyCount"));
-				post.setSectionID(rSet.getInt("nvcSectionId"));
+				post.setSectionID(rSet.getInt("intSectionId"));
 				post.setIsBoutique(rSet.getInt("intIsBoutique"));
 			}
 		} catch (SQLException e) {

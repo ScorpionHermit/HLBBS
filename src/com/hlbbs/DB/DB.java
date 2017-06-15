@@ -44,7 +44,7 @@ public class DB
 	public static Connection GetConnection()
 	{
 		if(m_instance == null)
-			Init("root", "zxz6", "hlbbs", "118.89.105.161");
+			return null;
 		return m_instance.m_con;
 	}
 }

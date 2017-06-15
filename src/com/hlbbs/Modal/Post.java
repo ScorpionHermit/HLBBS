@@ -8,15 +8,15 @@
 package com.hlbbs.Modal;
 
 public class Post {
-	private int id;	// ID
-	private String title; // 标题
-	private String postMan; // 发贴人
-	private String content;	// 内容
-	private String postTime;	// 发布时间
+	private int id;					// ID
+	private String title; 			// 标题
+	private String postMan; 		// 发贴人
+	private String content;			// 内容
+	private String postTime;		// 发布时间
 	private String finalReplyTime; 	// 最后回复时间
-	private int replyCount;	// 回复数
-	private int sectionID;	// 版块ID
-	private int isBoutique;	//是否为精品
+	private int replyCount;			// 回复数
+	private int sectionID;			// 版块ID
+	private int isBoutique;			//是否为精品
 	
 	public int getId() {
 		return id;

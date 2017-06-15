@@ -14,7 +14,7 @@ public class SectionDAO extends DAO
 	
 	Section m_section;
 	
-	SectionDAO(Section section)
+	public SectionDAO(Section section)
 	{
 		m_section = section;
 	}
