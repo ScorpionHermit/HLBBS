@@ -70,22 +70,63 @@ public int deleteComment()
 
 	return result;
 }
-	public ArrayList<Comment> searchAll()
+/**
+ * 查询一个帖子所有的评论
+ * @return
+ */
+	public ArrayList<Comment> searchByPostsId()
 	{
-		String sql ="select * from t_hlbbs_comment";
+		String sql ="select * from t_hlbbs_comment where intPostsId=?";
 		ArrayList<Comment> list =new ArrayList<>();
 
 		try {
 			pStatement =m_con.prepareStatement(sql);
+			pStatement.setInt(1, comment.getPostsId());
 			rSet =pStatement.executeQuery();
 			while(rSet.next())
 			{
 				comment.setId(rSet.getInt("id"));
 				comment.setUserId(rSet.getInt("intUserId"));
 				comment.setPostsId(rSet.getInt("intPostsId"));
-		        comment.setContent(rSet.getString("dtmComTime"));
+		        comment.setComTime(rSet.getString("dtmComTime"));
 		        comment.setContent(rSet.getString("nvcContent"));
 		        comment.setBuildingNum(rSet.getInt("intBuildingNum"));
+		        comment.setTitle(rSet.getString("nvcTitle"));
+		        list.add(comment);
+		        
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally
+		{
+			this.ClosePreStatement(pStatement);
+			this.CloseResultSet(rSet);
+		}
+		return list;
+	}
+	/**
+	 * 查询一个用户所有的评论
+	 * @return
+	 */
+	public ArrayList<Comment> searchByUserId()
+	{
+		String sql ="select * from t_hlbbs_comment where intUserId=?";
+		ArrayList<Comment> list =new ArrayList<>();
+
+		try {
+			pStatement =m_con.prepareStatement(sql);
+			pStatement.setInt(1, comment.getUserId());
+			rSet =pStatement.executeQuery();
+			while(rSet.next())
+			{
+				comment.setId(rSet.getInt("id"));
+				comment.setUserId(rSet.getInt("intUserId"));
+				comment.setPostsId(rSet.getInt("intPostsId"));
+		        comment.setComTime(rSet.getString("dtmComTime"));
+		        comment.setContent(rSet.getString("nvcContent"));
+		        comment.setBuildingNum(rSet.getInt("intBuildingNum"));
+		        comment.setTitle(rSet.getString("nvcTitle"));
 		        list.add(comment);
 		        
 			}
@@ -112,9 +153,10 @@ public int deleteComment()
 				comment.setId(rSet.getInt("id"));
 				comment.setUserId(rSet.getInt("intUserId"));
 				comment.setPostsId(rSet.getInt("intPostsId"));
-		        comment.setContent(rSet.getString("dtmComTime"));
+				 comment.setComTime(rSet.getString("dtmComTime"));
 		        comment.setContent(rSet.getString("nvcContent"));
 		        comment.setBuildingNum(rSet.getInt("intBuildingNum"));
+		        comment.setTitle(rSet.getString("nvcTitle"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

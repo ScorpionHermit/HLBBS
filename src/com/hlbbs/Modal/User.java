@@ -11,12 +11,12 @@ public class User {
      private int Integral;             //积分
      private String PersonalizedSignature;//个性签名
      private int Level;
-     
+     private String registertime ;//注册时间
 	
 	
 	
 	public User(int id, String name, String passWord, String emailAddress, int roleType, String sex,
-			String headPortrait, int integral, String personalizedSignature, int level) {
+			String headPortrait, int integral, String personalizedSignature, int level,String regtime) {
 		super();
 		this.id = id;
 		Name = name;
@@ -28,6 +28,7 @@ public class User {
 		Integral = integral;
 		PersonalizedSignature = personalizedSignature;
 		Level = level;
+		registertime =regtime;
 	}
 
 	public User(){}
@@ -92,6 +93,14 @@ public class User {
 
 	public void setLevel(int level) {
 		Level = level;
+	}
+
+	public String getRegistertime() {
+		return registertime;
+	}
+
+	public void setRegistertime(String registertime) {
+		this.registertime = registertime;
 	}
 
 

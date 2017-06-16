@@ -207,4 +207,64 @@ public class PostDAO extends DAO {
 		
 		return result;
 	}
+	/**
+	 * 根据帖子id查询帖子
+	 * @return
+	 */
+	public boolean searchByPostId()
+	{
+		String sql ="select * from t__hlbbs_posts where id=?";
+		boolean issuccess=false;
+		try {
+			pStatement=m_con.prepareStatement(sql);
+			rSet=pStatement.executeQuery();
+			if(rSet.first())
+			{
+				post.setId(rSet.getInt("id"));
+				post.setTitle(rSet.getString("nvcTitle"));
+				post.setPostMan(rSet.getInt("intPostman"));
+				post.setContent(rSet.getString("nvcContent"));
+				post.setPostTime(rSet.getString("dtmPostTime"));
+				post.setFinalReplyTime(rSet.getString("dtmFinalReplyTime"));
+				post.setReplyCount(rSet.getInt("intReplyCount"));
+				post.setSectionID(rSet.getInt("intSectionId"));
+				post.setIsBoutique(rSet.getInt("intIsBoutique"));
+				issuccess=true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			this.ClosePreStatement(pStatement);
+			this.CloseResultSet(rSet);
+		}
+		return issuccess;
+	}
+	/**
+	 * 查询一个帖子的评论数
+	 * @return
+	 */
+	public int commentCount()
+	{
+		String sql = "select count(*) from ( select * from  t_hlbbs_comment com where com.intPostsId=?) as total";
+		int rowCount = 0;   
+		try {
+			pStatement=m_con.prepareStatement(sql);
+			pStatement.setInt(1, post.getId());
+			rSet=pStatement.executeQuery();    
+			 
+			if(rSet.next())    
+			{    
+			    rowCount=rSet.getInt("total");    
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			this.ClosePreStatement(pStatement);
+			this.CloseResultSet(rSet);
+		}
+		return rowCount;
+		
+	}
 }
