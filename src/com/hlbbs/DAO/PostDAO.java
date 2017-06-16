@@ -93,40 +93,6 @@ public class PostDAO extends DAO {
 	}
 	
 	/**
-	 * 查询全部帖子
-	 * @return
-	 */
-	public ArrayList<Post> searchAll()
-	{
-		String sql ="select * from t_hlbbs_posts";
-		ArrayList<Post> list =new ArrayList<>();
-
-		try {
-			pStatement =m_con.prepareStatement(sql);
-			rSet =pStatement.executeQuery();
-			while (rSet.next()) {
-				post.setId(rSet.getInt("id"));
-				post.setTitle(rSet.getString("nvcTitle"));
-				post.setPostMan(rSet.getInt("intPostman"));
-				post.setContent(rSet.getString("nvcContent"));
-				post.setPostTime(rSet.getString("dtmPostTime"));
-				post.setFinalReplyTime(rSet.getString("dtmFinalReplyTime"));
-				post.setReplyCount(rSet.getInt("intReplyCount"));
-				post.setSectionID(rSet.getInt("nvcSectionId"));
-				post.setIsBoutique(rSet.getInt("intIsBoutique"));
-		        list.add(post);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			this.ClosePreStatement(pStatement);
-			this.CloseResultSet(rSet);
-		}
-		
-		return list;
-	}
-	
-	/**
 	 * 查询某个版块下的帖子数
 	 * @return
 	 */
@@ -155,7 +121,8 @@ public class PostDAO extends DAO {
 	 * 根据版块ID查询最新回复的帖子
 	 * @return
 	 */
-	public Post searchNewById() {
+	public boolean searchNewById() {
+		boolean isNull = false;
 		String sql = "select * from t_hlbbs_posts where intSectionId=? "
 				+ "order by dtmFinalReplyTime desc limit 1";
 		try {
@@ -173,13 +140,15 @@ public class PostDAO extends DAO {
 				post.setReplyCount(rSet.getInt("intReplyCount"));
 				post.setSectionID(rSet.getInt("intSectionId"));
 				post.setIsBoutique(rSet.getInt("intIsBoutique"));
+			} else {
+				isNull = true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			this.ClosePreStatement(pStatement);
 		}
-		return post;
+		return isNull;
 	}
 	
 	/**
