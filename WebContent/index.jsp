@@ -57,7 +57,7 @@
 			<table cellspacing="0" cellpadding="0" width="100%">
 				<tr class="tr2" align="center">
 					<td colspan="2">论坛</td>
-					<td style="width: 5%;">主题</td>
+					<td style="width: 5%;">主题帖数</td>
 					<td style="width: 25%">最后发表</td>
 				</tr>
 				<!--    版块       -->

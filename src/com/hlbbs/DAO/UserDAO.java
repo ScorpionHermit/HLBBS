@@ -63,7 +63,7 @@ public class UserDAO extends DAO {
      * @param user
      * @return 更新条数
      */
-    public void updateUser(){
+    public void updateUserPwd(){
     	try{
         String   sql  = "update t_hlbbs_user set nvcPass=? where nvcNickName=?";
         pstmt=m_con.prepareStatement(sql);
@@ -79,6 +79,32 @@ public class UserDAO extends DAO {
     		this.ClosePreStatement(pstmt);
     	}
     }
+    
+    /**
+     * 修改用户密码
+     * @param user
+     * @return 更新条数
+     */
+    public void updateUserInf(){
+    	try{
+        String   sql  = "update t_hlbbs_user set nvcNickName=?,nvcSex=?,nvcEmailAddress=?,nvcPersonalizedSignature=? and  where id=?";
+        pstmt=m_con.prepareStatement(sql);
+        pstmt.setString(1,user.getName() );
+        pstmt.setString(2, user.getSex());
+        pstmt.setString(3, user.getEmailAddress());
+        pstmt.setString(4, user.getPersonalizedSignature());
+        pstmt.setString(5, Integer.toString(user.getId()));
+        int result = pstmt.executeUpdate();
+		System.out.println("update result="+result);
+    	}catch(SQLException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}finally
+    	{
+    		this.ClosePreStatement(pstmt);
+    	}
+    }
+    
     
     /**
      * 根据用户名查找用户

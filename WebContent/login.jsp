@@ -64,10 +64,10 @@ if(request.getSession().getAttribute("user") == null){
 <!--      用户登录表单        -->
 <DIV class="t" style="MARGIN-TOP: 15px" align="center">
 	<FORM name="loginForm" onSubmit="return check()" action="DoLogin" method="post">
-		<br/>用户名 &nbsp;<INPUT class="input" tabIndex="1"  type="text"      maxLength="20" size="35" name="uName">
-		<br/>密　码 &nbsp;<INPUT class="input" tabIndex="2"  type="password"  maxLength="20" size="40" name="uPass">
-		<br/>验证码 &nbsp;<INPUT class="input" tabIndex="3"  type="text"  maxLength="10" size="10" name="authimg"><img alt="验证码图片" src="authimg" align="absmiddle" />
-		<br/><INPUT class="btn"  tabIndex="6"  type="submit" value="登 录">
+		<br/><b>用户名:</b> &nbsp;<INPUT class="input" tabIndex="1"  type="text"      maxLength="20" size="35" name="uName"  style="text-align:center">
+		<br/><b>密　码:</b> &nbsp;<INPUT class="input" tabIndex="2"  type="password"  maxLength="20" size="35" name="uPass"  style="text-align:center">
+		<br/><b>验证码:</b> &nbsp;<INPUT class="input" tabIndex="3"  type="text"  maxLength="10" size="25" name="authimg"  style="text-align:center"><img alt="验证码图片" src="authimg" align="absmiddle" />
+		<br/><br><INPUT class="btn"  tabIndex="6"  type="submit" value="登 录" style="background:#e0f0f9;">
 	</FORM>
 </DIV>
 <!--      声明        -->
