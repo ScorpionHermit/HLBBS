@@ -129,17 +129,74 @@ public class PostDAO extends DAO {
 	}
 	
 	/**
-	 * 根据版块ID查询帖子
+	 * 查询某个版块下的帖子数
+	 * @return
+	 */
+	public int postsCount() {
+		int count = 0;
+		String sql = "select count(id) from t_hlbbs_posts where intSectionId=?";
+		
+		try {
+			pStatement = m_con.prepareStatement(sql);
+			pStatement.setInt(1, post.getSectionID());
+			rSet = pStatement.executeQuery();
+			
+			if (rSet.next()) {
+				count = rSet.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			this.ClosePreStatement(pStatement);
+		}
+		
+		return count;
+	}
+	
+	/**
+	 * 根据版块ID查询最新回复的帖子
+	 * @return
+	 */
+	public Post searchNewById() {
+		String sql = "select top 1 * from t_hlbbs_posts where intSectionId=? "
+				+ "order by dtmFinalReplyTime desc";
+		try {
+			pStatement = m_con.prepareStatement(sql);
+			pStatement.setInt(1, post.getSectionID());
+			rSet = pStatement.executeQuery();
+			
+			if (rSet.next()) {
+				post.setId(rSet.getInt("id"));
+				post.setTitle(rSet.getString("nvcTitle"));
+				post.setPostMan(rSet.getInt("intPostman"));
+				post.setContent(rSet.getString("nvcContent"));
+				post.setPostTime(rSet.getString("dtmPostTime"));
+				post.setFinalReplyTime(rSet.getString("dtmFinalReplyTime"));
+				post.setReplyCount(rSet.getInt("intReplyCount"));
+				post.setSectionID(rSet.getInt("intSectionId"));
+				post.setIsBoutique(rSet.getInt("intIsBoutique"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			this.ClosePreStatement(pStatement);
+		}
+		return post;
+	}
+	
+	/**
+	 * 查询某个版块下的所有帖子
 	 * @return
 	 */
 	public Post searchById() {
-		String sql="select * from t_hlbbs_posts where intSectionId=?";
+		String sql="select * from t_hlbbs_posts where intSectionId=? order by "
+				+ "dtmFinalReplyTime desc";
 		try {
 			pStatement=m_con.prepareStatement(sql);
 			pStatement.setInt(1, post.getSectionID());
 			rSet =pStatement.executeQuery();
 			
-			if (rSet.next()) {
+			while (rSet.next()) {
 				post.setId(rSet.getInt("id"));
 				post.setTitle(rSet.getString("nvcTitle"));
 				post.setPostMan(rSet.getInt("intPostman"));
