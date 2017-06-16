@@ -193,7 +193,7 @@ public class PostDAO extends DAO {
 	 * @return
 	 */
 	public int updateFinalReplyTime() {
-		String sql = "update t__hlbbs_posts set dtmFinalReplyTime=? where id=?";
+		String sql = "update t_hlbbs_posts set dtmFinalReplyTime=? where id=?";
 		int result =0;
 		
 		try {
@@ -215,10 +215,11 @@ public class PostDAO extends DAO {
 	 */
 	public boolean searchByPostId()
 	{
-		String sql ="select * from t__hlbbs_posts where id=?";
+		String sql ="select * from t_hlbbs_posts where id=?";
 		boolean issuccess=false;
 		try {
 			pStatement=m_con.prepareStatement(sql);
+			pStatement.setInt(1, post.getId());
 			rSet=pStatement.executeQuery();
 			if(rSet.first())
 			{

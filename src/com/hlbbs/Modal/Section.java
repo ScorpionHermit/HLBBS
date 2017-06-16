@@ -2,10 +2,10 @@ package com.hlbbs.Modal;
 
 public class Section
 {
-	int m_id;
-	String m_nvcSectionName;
-	int m_intModerator;
-	int m_intPosts;
+	private int m_id;
+	private String m_nvcSectionName;
+	private int m_intModerator;
+	private int m_intPosts;
 	public int getID()
 	{
 		return m_id;

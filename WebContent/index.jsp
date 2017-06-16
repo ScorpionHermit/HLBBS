@@ -111,7 +111,7 @@
 					<td align="center"><%=postCount %></td>
 					<th>
 						<span> 
-							<a href="detail.jsp?page=1&boardid=<%=sectionID%>&topicid=<%=lastPostID %>"><%=lastPostTitle %></a>
+							<a href="DetailControl?page=1&boardid=<%=sectionID%>&topicid=<%=lastPostID %>&action=show"><%=lastPostTitle %></a>
 						</span> 
 						<br/>
 						<span><%=lastUserName %></span>
@@ -119,6 +119,7 @@
 				</tr>
 				<%
 					}
+				
 				%>
 			</table>
 		</div>
