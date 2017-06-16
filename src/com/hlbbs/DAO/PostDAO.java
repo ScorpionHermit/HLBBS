@@ -34,7 +34,7 @@ public class PostDAO extends DAO {
 		try {
 			pStatement=m_con.prepareStatement(sql);
 			pStatement.setString(1, post.getTitle());
-			pStatement.setString(2, post.getPostMan());
+			pStatement.setInt(2, post.getPostMan());
 			pStatement.setString(3, post.getContent());
 			pStatement.setString(4, post.getPostTime());
 			pStatement.setInt(5, post.getReplyCount());
@@ -108,7 +108,7 @@ public class PostDAO extends DAO {
 			while (rSet.next()) {
 				post.setId(rSet.getInt("id"));
 				post.setTitle(rSet.getString("nvcTitle"));
-				post.setPostMan(rSet.getString("nvcPostman"));
+				post.setPostMan(rSet.getInt("intPostman"));
 				post.setContent(rSet.getString("nvcContent"));
 				post.setPostTime(rSet.getString("dtmPostTime"));
 				post.setFinalReplyTime(rSet.getString("dtmFinalReplyTime"));
@@ -142,7 +142,7 @@ public class PostDAO extends DAO {
 			if (rSet.next()) {
 				post.setId(rSet.getInt("id"));
 				post.setTitle(rSet.getString("nvcTitle"));
-				post.setPostMan(rSet.getString("intPostman"));
+				post.setPostMan(rSet.getInt("intPostman"));
 				post.setContent(rSet.getString("nvcContent"));
 				post.setPostTime(rSet.getString("dtmPostTime"));
 				post.setFinalReplyTime(rSet.getString("dtmFinalReplyTime"));

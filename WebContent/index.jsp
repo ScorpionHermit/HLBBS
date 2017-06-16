@@ -78,7 +78,7 @@
 						if(post.getTitle() != null)
 						{
 							UserDAO uDAO = new UserDAO(user);
-							user.setId(Integer.valueOf(post.getPostMan()));
+							user.setId(post.getPostMan());
 							uDAO.findUserById();
 							lastPostID = post.getId();
 							lastPostTitle = post.getTitle();
@@ -97,11 +97,13 @@
 						href="list.jsp?page=1&boardid=<%=sectionID%>"><%=s.getNvcSectionName() %></a>
 					</th>
 					<td align="center"><%=666 %></td>
-					<th><span> <a
-							href="detail.jsp?page=1&boardid=<%=sectionID%>&topicid=<%=lastPostID %>"><%=lastPostTitle %></a>
-					</span> <br /> <span><%=lastUserName %></span> <span class="gray">[
-							<%=lastPostTime%> ]
-					</span></th>
+					<th>
+						<span> 
+							<a href="detail.jsp?page=1&boardid=<%=sectionID%>&topicid=<%=lastPostID %>"><%=lastPostTitle %></a>
+						</span> 
+						<br/>
+						<span><%=lastUserName %></span>
+						<span class="gray">[<%=lastPostTime%> ]</span></th>
 				</tr>
 				<%
 					}
