@@ -102,6 +102,7 @@ public class UserDAO extends DAO {
                 user.setIntegral(rs.getInt("intIntegral"));
                 user.setPersonalizedSignature(rs.getString("nvcPersonalizedSignature"));
                 user.setLevel(rs.getInt("intLevel"));
+                user.setRegistertime(rs.getString("dtmRegTime"));
             }
             
         } catch (Exception e) {
@@ -135,6 +136,7 @@ public class UserDAO extends DAO {
                 user.setIntegral(rs.getInt("intIntegral"));
                 user.setPersonalizedSignature(rs.getString("nvcPersonalizedSignature"));
                 user.setLevel(rs.getInt("intLevel"));
+                user.setRegistertime(rs.getString("dtmRegTime"));
             }
         } catch (Exception e) {
             e.printStackTrace();                     // ¥¶¿Ì“Ï≥£
