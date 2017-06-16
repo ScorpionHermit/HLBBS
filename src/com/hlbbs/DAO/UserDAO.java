@@ -79,33 +79,32 @@ public class UserDAO extends DAO {
      * @param user
      * @return 根据用户名查询的用户对象
      */
-    public User findUserByName() {
+    public void findUserByName() {
         String sql  = "select * from t_hlbbs_user where nvcNickName=?";
-        User   user1 = null;
         try {
             pstmt = m_con.prepareStatement(sql);    // 取得PreparedStatement对象
             pstmt.setString(1, user.getName());             // 设置参数
             rs    = pstmt.executeQuery();          // 执行SQL取得结果集
             while( rs.next() ) {
-                user1 = new User();
-                user1.setId(rs.getInt("id"));
-                user1.setName(rs.getString("nvcNickName"));
-                user1.setEmailAddress(rs.getString("nvcEmailAddress"));
-                user1.setPassWord(rs.getString("nvcPass"));
-                user1.setRoleType(rs.getInt("intRoleType"));
-                user1.setSex(rs.getString("nvcSex"));
-                user1.setHeadPortrait(rs.getString("nvcHeadPortrait"));
-                user1.setIntegral(rs.getInt("intIntegral"));
-                user1.setPersonalizedSignature(rs.getString("nvcPersonalizedSignature"));
-                user1.setLevel(rs.getInt("intLevel"));
+                user.setId(rs.getInt("id"));
+                user.setName(rs.getString("nvcNickName"));
+                user.setEmailAddress(rs.getString("nvcEmailAddress"));
+                user.setPassWord(rs.getString("nvcPass"));
+                user.setRoleType(rs.getInt("intRoleType"));
+                user.setSex(rs.getString("nvcSex"));
+                user.setHeadPortrait(rs.getString("nvcHeadPortrait"));
+                user.setIntegral(rs.getInt("intIntegral"));
+                user.setPersonalizedSignature(rs.getString("nvcPersonalizedSignature"));
+                user.setLevel(rs.getInt("intLevel"));
             }
             
         } catch (Exception e) {
             e.printStackTrace();                   // 处理异常
         } finally {
           this.CloseResultSet(rs);
+          this.ClosePreStatement(pstmt);
         }
-        return user1;
+        
     }
     
     /**
