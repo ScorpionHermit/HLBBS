@@ -157,7 +157,7 @@ public class PostDAO extends DAO {
 	 */
 	public Post searchNewById() {
 		String sql = "select * from t_hlbbs_posts where intSectionId=? "
-				+ "order by dtmFinalReplyTime asc limit 1";
+				+ "order by dtmFinalReplyTime desc limit 1";
 		try {
 			pStatement = m_con.prepareStatement(sql);
 			pStatement.setInt(1, post.getSectionID());
