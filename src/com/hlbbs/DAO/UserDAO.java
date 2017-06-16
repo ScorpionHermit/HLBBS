@@ -28,29 +28,35 @@ public class UserDAO extends DAO {
     public UserDAO(User u){
     	user = u;
     }
-    public void addUser() {
-    	try{
-        String   sql  = "insert into t_hlbbs_user(nvcNickName,nvcPass,nvcEmailAddress,intRoleType,nvcSex,nvcHeadPortrait,intIntegral,nvcPersonalizedSignature,intLevel) values(?,?,?,?,?,?,?,?,?)";
-        pstmt=m_con.prepareStatement(sql);
-        pstmt.setString(1,user.getName());
-        pstmt.setString(2,user.getPassWord());
-        pstmt.setString(3,user.getEmailAddress());
-        pstmt.setInt(4,user.getRoleType());
-        pstmt.setString(5,user.getSex());
-        pstmt.setString(6,user.getHeadPortrait());
-        pstmt.setInt(7,user.getIntegral());
-        pstmt.setString(8,user.getPersonalizedSignature());
-        pstmt.setInt(9,user.getLevel());
-        int result = pstmt.executeUpdate();
-		System.out.println("add result="+result);
-    	}catch(SQLException e) {
-    		// TODO Auto-generated catch block
-    		e.printStackTrace();
-    	}finally
-    	{
-    		this.ClosePreStatement(pstmt);
-    	}
-    }    
+
+	public boolean addUser()
+	{
+		boolean isSuccess = false;
+		try
+		{
+			String sql = "insert into t_hlbbs_user(nvcNickName,nvcPass,nvcEmailAddress,intRoleType,nvcSex,nvcHeadPortrait,intIntegral,nvcPersonalizedSignature,intLevel) values(?,?,?,?,?,?,?,?,?)";
+			pstmt = m_con.prepareStatement(sql);
+			pstmt.setString(1, user.getName());
+			pstmt.setString(2, user.getPassWord());
+			pstmt.setString(3, user.getEmailAddress());
+			pstmt.setInt(4, user.getRoleType());
+			pstmt.setString(5, user.getSex());
+			pstmt.setString(6, user.getHeadPortrait());
+			pstmt.setInt(7, user.getIntegral());
+			pstmt.setString(8, user.getPersonalizedSignature());
+			pstmt.setInt(9, user.getLevel());
+			int result = pstmt.executeUpdate();
+			if (result != 0)
+				isSuccess = true;
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		} finally
+		{
+			this.ClosePreStatement(pstmt);
+		}
+		return isSuccess;
+	}
     
     /**
      * –ﬁ∏ƒ”√ªß√‹¬Î

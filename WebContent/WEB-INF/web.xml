@@ -4,7 +4,6 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
-  
   <context-param>
     <param-name>DBIP</param-name>
     <param-value>118.89.105.161</param-value>
