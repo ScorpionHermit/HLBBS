@@ -20,4 +20,12 @@
     <param-name>DBName</param-name>
     <param-value>hlbbs</param-value>
   </context-param>
+  <servlet>
+    <servlet-name>authimg</servlet-name>
+    <servlet-class>com.hlbbs.Control.AuthImg</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>authimg</servlet-name>
+    <url-pattern>/authimg</url-pattern>
+  </servlet-mapping>
 </web-app>

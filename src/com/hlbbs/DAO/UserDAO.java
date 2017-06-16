@@ -16,7 +16,7 @@ import com.hlbbs.Modal.User;
 
 
 public class UserDAO extends DAO {
-	User user;
+	public User user;
 	private PreparedStatement pstmt = null;       // 用于执行SQL语句
     private ResultSet         rs    = null;       // 用户保存查询结果集   
 	

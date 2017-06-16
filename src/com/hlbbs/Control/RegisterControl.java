@@ -61,7 +61,7 @@ public class RegisterControl extends HttpServlet {
 			boolean isSuccess = userDao.addUser();
 			if(isSuccess)
 			{                                                  // 判断用户是否存在
-				response.sendRedirect("index.jsp");
+				response.sendRedirect("login.jsp");
 				return;
 			}
 		}
