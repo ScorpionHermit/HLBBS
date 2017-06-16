@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
+
 import com.hlbbs.Modal.Post;
 
 public class PostDAO extends DAO {
@@ -28,15 +30,15 @@ public class PostDAO extends DAO {
 	 */
 	public int addPost() {
 		int result=0;
-		String sql ="insert into t_hlbbs_posts(ncvTitle, nvcPostman, ncvContent,"
-				+ " dtmPostTime, intReplyCount, nvcSectionId, intIsBoutique) "
+		String sql ="insert into t_hlbbs_posts(nvcTitle, intPostman, nvcContent,"
+				+ " dtmPostTime, intReplyCount, intSectionId, intIsBoutique) "
 				+ "values(?, ?, ?, ?, ?, ?, ?)";
 		try {
 			pStatement=m_con.prepareStatement(sql);
 			pStatement.setString(1, post.getTitle());
 			pStatement.setInt(2, post.getPostMan());
 			pStatement.setString(3, post.getContent());
-			pStatement.setString(4, post.getPostTime());
+			pStatement.setTimestamp(4, new java.sql.Timestamp(new Date().getTime()));
 			pStatement.setInt(5, post.getReplyCount());
 			pStatement.setInt(6, post.getSectionID());
 			pStatement.setInt(7, post.getIsBoutique());

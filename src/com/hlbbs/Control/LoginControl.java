@@ -54,8 +54,8 @@ public class LoginControl extends HttpServlet {
 		} else {
 			msg = "ÖØ¸´µÇÂ¼";
 		}
-		String forward="/error.jsp?msg="+msg;
-		request.getRequestDispatcher(forward).forward(request,response);
+		
+		request.getRequestDispatcher("login.jsp").forward(request,response);
 	}
 
 	/**

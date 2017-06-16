@@ -9,19 +9,20 @@
 	contentType="text/html; charset=utf-8"%>
 <%
 if(session.getAttribute("user")==null){
-	request.getRequestDispatcher("error.jsp?msg=您尚未登录").forward(request,response);
+	request.getRequestDispatcher("login.jsp").forward(request,response);
 }
-request.setCharacterEncoding("GBK");
+request.setCharacterEncoding("UTF-8");
 
 
 
-int      id    = Integer.parseInt( request.getParameter("boardId") );      // 取得版块id
+int      id  = Integer.parseInt(request.getParameter("boardid") );     // 取得版块id
 Section  section    = new Section();  
 section.setID(id);// 取得版块信息
-SectionDAO sectionDAO   = new SectionDAO(section);                              // 得到版块Dao的实例
+SectionDAO sectionDAO   = new SectionDAO(section);
+sectionDAO.findBoardByID();// 得到版块Dao的实例
 
 String   topicId    = request.getParameter("topicId")==null ? "": request.getParameter("topicId");
-String   formAction = request.getParameter("post").equals("newreply")? "manage/doReply.jsp":"manage/doPost.jsp";
+String   formAction = request.getParameter("post").equals("newreply")? "manage/doReply.jsp":"PostControl";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
@@ -77,11 +78,11 @@ if(request.getSession().getAttribute("user") == null){
 	<!--      导航        -->
 	<DIV>
 		&gt;&gt;<B><a href="index.jsp">论坛首页</a></B>&gt;&gt;
-		<B><a href="list.jsp?page=1&boardId=<%=boardId %>"><%=board.getBoardName() %></a></B>
+		<B><a href="list.jsp?page=1&boardid=<%=id%>"><%=section.getNvcSectionName() %></a></B>
 	</DIV><BR/>
 	<DIV>
-		<FORM name="postForm" onSubmit="return check()" action="<%=formAction%>" method="POST"> 
-			<INPUT type="hidden" name="boardId" value="<%=boardId%>"/>
+		<FORM name="postForm" onSubmit="return check()" action="PostControl" method="POST"> 
+			<INPUT type="hidden" name="boardId" value="<%=id%>"/>
 			<INPUT type="hidden" name="topicId" value="<%=topicId%>"/>
 			<DIV class="t">
 				<TABLE cellSpacing="0" cellPadding="0" align="center">
@@ -117,8 +118,7 @@ if(request.getSession().getAttribute("user") == null){
 </DIV>
 <!--      声明        -->
 <BR/>
-<CENTER class="gray">2007 Beijing Aptech Beida Jade Bird
-Information Technology Co.,Ltd 版权所有</CENTER>
+<CENTER class="gray">2017-安徽工业大学zxz6工作室-版权所有</CENTER>
 
 </BODY>
 </HTML>
