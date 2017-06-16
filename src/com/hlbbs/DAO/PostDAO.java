@@ -122,7 +122,7 @@ public class PostDAO extends DAO {
 	 * @return
 	 */
 	public boolean searchNewById() {
-		boolean isNull = false;
+		boolean isSuccess = false;
 		String sql = "select * from t_hlbbs_posts where intSectionId=? "
 				+ "order by dtmFinalReplyTime desc limit 1";
 		try {
@@ -131,6 +131,7 @@ public class PostDAO extends DAO {
 			rSet = pStatement.executeQuery();
 			
 			if (rSet.next()) {
+				isSuccess = true;
 				post.setId(rSet.getInt("id"));
 				post.setTitle(rSet.getString("nvcTitle"));
 				post.setPostMan(rSet.getInt("intPostman"));
@@ -140,15 +141,13 @@ public class PostDAO extends DAO {
 				post.setReplyCount(rSet.getInt("intReplyCount"));
 				post.setSectionID(rSet.getInt("intSectionId"));
 				post.setIsBoutique(rSet.getInt("intIsBoutique"));
-			} else {
-				isNull = true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			this.ClosePreStatement(pStatement);
 		}
-		return isNull;
+		return isSuccess;
 	}
 	
 	/**
@@ -158,24 +157,26 @@ public class PostDAO extends DAO {
 	public ArrayList<Post> searchById() {
 		String sql="select * from t_hlbbs_posts where intSectionId=? order by "
 				+ "dtmFinalReplyTime desc";
-		ArrayList<Post> list =new ArrayList<>();
+		ArrayList<Post> list =new ArrayList<Post>();
 		
 		try {
 			pStatement=m_con.prepareStatement(sql);
 			pStatement.setInt(1, post.getSectionID());
 			rSet =pStatement.executeQuery();
 			
-			while (rSet.next()) {
-				post.setId(rSet.getInt("id"));
-				post.setTitle(rSet.getString("nvcTitle"));
-				post.setPostMan(rSet.getInt("intPostman"));
-				post.setContent(rSet.getString("nvcContent"));
-				post.setPostTime(rSet.getString("dtmPostTime"));
-				post.setFinalReplyTime(rSet.getString("dtmFinalReplyTime"));
-				post.setReplyCount(rSet.getInt("intReplyCount"));
-				post.setSectionID(rSet.getInt("intSectionId"));
-				post.setIsBoutique(rSet.getInt("intIsBoutique"));
-				list.add(post);
+			while (rSet.next()) 
+			{
+				Post p = new Post();
+				p.setId(rSet.getInt("id"));
+				p.setTitle(rSet.getString("nvcTitle"));
+				p.setPostMan(rSet.getInt("intPostman"));
+				p.setContent(rSet.getString("nvcContent"));
+				p.setPostTime(rSet.getString("dtmPostTime"));
+				p.setFinalReplyTime(rSet.getString("dtmFinalReplyTime"));
+				p.setReplyCount(rSet.getInt("intReplyCount"));
+				p.setSectionID(rSet.getInt("intSectionId"));
+				p.setIsBoutique(rSet.getInt("intIsBoutique"));
+				list.add(p);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

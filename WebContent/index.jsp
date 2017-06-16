@@ -65,6 +65,7 @@
 					for (Section s : secs)
 					{
 						int lastPostID = -1;
+						int postCount = 0;
 						String lastPostTitle = "";
 						String lastPostTime = "";
 						String lastUserName = "";
@@ -74,9 +75,10 @@
 						int sectionID = s.getID();
 						PostDAO pDAO = new PostDAO(post);
 						post.setSectionID(sectionID);
-						pDAO.searchById();
-						if(post.getTitle() != null)
+						boolean isFinded =  pDAO.searchNewById();
+						if(isFinded)
 						{
+							postCount = pDAO.postsCount();
 							UserDAO uDAO = new UserDAO(user);
 							user.setId(post.getPostMan());
 							uDAO.findUserById();
@@ -96,7 +98,7 @@
 					<th align="left"><img src="image/board.gif"> <a
 						href="list.jsp?page=1&boardid=<%=sectionID%>"><%=s.getNvcSectionName() %></a>
 					</th>
-					<td align="center"><%=666 %></td>
+					<td align="center"><%=postCount %></td>
 					<th>
 						<span> 
 							<a href="detail.jsp?page=1&boardid=<%=sectionID%>&topicid=<%=lastPostID %>"><%=lastPostTitle %></a>
