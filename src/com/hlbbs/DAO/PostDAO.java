@@ -40,8 +40,7 @@ public class PostDAO extends DAO {
 			pStatement.setInt(5, post.getReplyCount());
 			pStatement.setInt(6, post.getSectionID());
 			pStatement.setInt(7, post.getIsBoutique());
-			result= pStatement.executeUpdate();
-			
+			result= pStatement.executeUpdate();	
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally{
@@ -116,7 +115,6 @@ public class PostDAO extends DAO {
 				post.setSectionID(rSet.getInt("nvcSectionId"));
 				post.setIsBoutique(rSet.getInt("intIsBoutique"));
 		        list.add(post);
-		        
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -134,7 +132,7 @@ public class PostDAO extends DAO {
 	 */
 	public int postsCount() {
 		int count = 0;
-		String sql = "select count(id) from t_hlbbs_posts where intSectionId=?";
+		String sql = "select count(*) from t_hlbbs_posts where intSectionId=?";
 		
 		try {
 			pStatement = m_con.prepareStatement(sql);
@@ -158,8 +156,8 @@ public class PostDAO extends DAO {
 	 * @return
 	 */
 	public Post searchNewById() {
-		String sql = "select top 1 * from t_hlbbs_posts where intSectionId=? "
-				+ "order by dtmFinalReplyTime desc";
+		String sql = "select * from t_hlbbs_posts where intSectionId=? "
+				+ "order by dtmFinalReplyTime asc limit 1";
 		try {
 			pStatement = m_con.prepareStatement(sql);
 			pStatement.setInt(1, post.getSectionID());
@@ -188,9 +186,11 @@ public class PostDAO extends DAO {
 	 * 查询某个版块下的所有帖子
 	 * @return
 	 */
-	public Post searchById() {
+	public ArrayList<Post> searchById() {
 		String sql="select * from t_hlbbs_posts where intSectionId=? order by "
 				+ "dtmFinalReplyTime desc";
+		ArrayList<Post> list =new ArrayList<>();
+		
 		try {
 			pStatement=m_con.prepareStatement(sql);
 			pStatement.setInt(1, post.getSectionID());
@@ -206,12 +206,35 @@ public class PostDAO extends DAO {
 				post.setReplyCount(rSet.getInt("intReplyCount"));
 				post.setSectionID(rSet.getInt("intSectionId"));
 				post.setIsBoutique(rSet.getInt("intIsBoutique"));
+				list.add(post);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			this.ClosePreStatement(pStatement);
 		}
-		return post;
+		return list;
+	}
+	
+	/**
+	 * 更新最新回复时间
+	 * @return
+	 */
+	public int updateFinalReplyTime() {
+		String sql = "update t__hlbbs_posts set dtmFinalReplyTime=? where id=?";
+		int result =0;
+		
+		try {
+			pStatement=m_con.prepareStatement(sql);
+			pStatement.setString(1, post.getFinalReplyTime());
+			pStatement.setInt(2, post.getId());
+			result = pStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			this.ClosePreStatement(pStatement);
+		}
+		
+		return result;
 	}
 }
