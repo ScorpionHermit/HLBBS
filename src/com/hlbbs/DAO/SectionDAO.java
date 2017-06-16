@@ -84,5 +84,58 @@ public class SectionDAO extends DAO
             CloseResultSet(rs);
         }
     }
+    
+    /**
+     * 添加新板块
+     * @return
+     */
+    public boolean InsertSection()
+    {
+    	String sql = "INSERT INTO t_hlbbs_section(nvcSectionName, intModerator) VALUES(?, ?)";
+        PreparedStatement ps = null;
+        boolean isSuccess = false;
+        if(m_section == null)
+        	return isSuccess;
+        try 
+        {
+            ps = m_con.prepareStatement(sql);
+            ps.setString(1, m_section.getNvcSectionName());
+            ps.setInt(2, m_section.getIntModerator());
+            if(ps.executeUpdate() > 0)
+            	isSuccess = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+        	ClosePreStatement(ps);
+        }
+        return isSuccess;
+    }
+    
+    /**
+     * 修改板块信息
+     * @return
+     */
+    public boolean ModifySection()
+    {
+    	String sql = "UPDATE t_hlbbs_section SET nvcSectionName = ?, intModerator = ? WHERE id = ?";
+        PreparedStatement ps = null;
+        boolean isSuccess = false;
+        if(m_section == null)
+        	return isSuccess;
+        try 
+        {
+            ps = m_con.prepareStatement(sql);
+            ps.setString(1, m_section.getNvcSectionName());
+            ps.setInt(2, m_section.getIntModerator());
+            ps.setInt(3, m_section.getID());
+            if(ps.executeUpdate() > 0)
+            	isSuccess = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+        	ClosePreStatement(ps);
+        }
+        return isSuccess;
+    }
 }
 

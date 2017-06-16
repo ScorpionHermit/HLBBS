@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="com.hlbbs.Modal.Role"%>
 <%@page import="com.hlbbs.DAO.UserDAO"%>
 <%@page import="com.hlbbs.DAO.PostDAO"%>
 <%@page import="com.hlbbs.Modal.Post"%>
@@ -8,7 +10,7 @@
 <%@ page language="java" pageEncoding="utf-8"
 	contentType="text/html; charset=utf-8"%>
 <%
-	request.setCharacterEncoding("GBK"); // 设置字符集
+	request.setCharacterEncoding("utf-8"); // 设置字符集
 
 	Section section = new Section();
 	SectionDAO secDAO = new SectionDAO(section);
@@ -26,7 +28,7 @@
 <body>
 
 	<div>
-		<img src="image/logo.gif">
+		<img style="width:250px" src="image/logo.png">
 	</div>
 	<!--      用户信息、登录、注册        -->
 	<%
@@ -45,7 +47,15 @@
 	<div class="h">
 		您好：
 		<%=user.getName() %>
-		&nbsp;| &nbsp; <a href="manage/dologout.jsp">登出</a> |
+		&nbsp;| &nbsp; <a href="LoginoutControl">登出</a> |
+	<%
+		if(user.getRoleType() == Role.WebManager)
+		{
+	%>
+		&nbsp; <a href="manager/sectionmanager.jsp">论坛管理</a> |
+	<%
+		}
+	%>
 	</div>
 	<%
 		}
@@ -105,7 +115,7 @@
 						</span> 
 						<br/>
 						<span><%=lastUserName %></span>
-						<span class="gray">[<%=lastPostTime%> ]</span></th>
+						<span class="gray">[<%=lastPostTime %> ]</span></th>
 				</tr>
 				<%
 					}

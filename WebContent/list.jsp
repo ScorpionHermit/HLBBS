@@ -56,7 +56,7 @@ User loginUser = (User)session.getAttribute("user");
 %>
 <div class="h">
 	您好：　<%=loginUser.getName() %>
-	&nbsp;| &nbsp; <a href="manage/dologout.jsp">登出</a> |
+	&nbsp;| &nbsp; <a href="LoginoutControl">登出</a> |
 </div>
 <%
 }
