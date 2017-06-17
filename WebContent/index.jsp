@@ -47,8 +47,9 @@
 	<div class="h">
 		您好：
 		<a href="user.jsp"><%=user.getName() %></a>
-		&nbsp;| &nbsp; <a href="LoginoutControl">登出</a> |
-		&nbsp; <a href="user.jsp">我的空间</a> |
+		&nbsp;|&nbsp; <a href="LoginoutControl">登出</a> |
+		&nbsp;&nbsp;  <a href="user.jsp">我的空间</a> |
+		&nbsp;&nbsp; <a href="SignControl">签到</a> |
 	<%
 		if(Role.isWebManager(user.getRoleType()))
 		{

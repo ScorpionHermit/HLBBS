@@ -19,11 +19,21 @@ Section board =(Section)request.getAttribute("board");
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>荟灵BBS--看贴</title>
 <Link rel="stylesheet" type="text/css" href="style/style.css" />
+<script type="text/javascript">
+function del(){ 
+	if(!confirm("确认要删除？")){ 
+	//window.event.returnValue = false; 
+	return false;
+	} 
+	} 
+</script>
+
 </HEAD>
+
 
 <BODY>
 <DIV>
-	<IMG src="image/logo.gif">
+	<IMG style="width:250px" src="image/logo.gif">
 </DIV>
 
 <!--      用户信息、登录、注册        -->
@@ -85,7 +95,7 @@ if(session.getAttribute("user") == null){
 				<TH style="WIDTH: 20%">
 					<B><%=user.getName() %></B><BR/>
 					<img src="image/head/<%=user.getHeadPortrait()%>"/><BR/>
-					注册:<%=user.getRegistertime().substring(0,10) %><BR/>
+					注册时间:<%=user.getRegistertime().substring(0,10) %><BR/>
 				</TH>
 				<TH>
 					<H4><%=topic.getTitle() %></H4>
@@ -95,7 +105,7 @@ if(session.getAttribute("user") == null){
 						<%if(topic.getFinalReplyTime()!=null)
 						{
 							%>
-						最后修改:[<%=topic.getFinalReplyTime().substring(0,16) %>]
+						最后修改时间:[<%=topic.getFinalReplyTime().substring(0,16) %>]
 						<%} %>
 					</DIV>
 				</TH>
@@ -129,10 +139,10 @@ if(session.getAttribute("user") == null){
 					<DIV><pre><%=reply.getContent() %></pre></DIV>
 					<DIV class="tipad gray">
 						发表：[<%=reply.getComTime().substring(0,16) %>] &nbsp;
-						最后修改:[<%=topic.getFinalReplyTime().substring(0,16) %>]
 						
-						<A href="manage/doDeleteReply.jsp?boardid=<%=board.getID()%>&replyid=<%=reply.getId()%>">[删除]</A>
-						<A href="update.jsp?tipType=reply&boardid=<%=board.getID()%>&replyid=<%=reply.getId()%>">[修改]</A>
+						
+						<A href="ReplyControl?boardid=<%=board.getID()%>&topicid=<%=topic.getId()%>&id=<%=reply.getId()%>&option=deletereply" onclick="return del();">[删除]</A>
+						<A href="ReplyControl?boardid=<%=board.getID()%>&topicid=<%=topic.getId()%>&id=<%=reply.getId()%>&option=updatereply">[修改]</A>
 					</DIV>
 				</TH>
 			</TR>
@@ -140,7 +150,7 @@ if(session.getAttribute("user") == null){
 	</DIV>
 	<%} }%>
 	<DIV>
-		<a href="detail.jsp?page=<%=prep%>&boardid=<%=board.getID() %>&topicid=<%=topic.getId() %>">上一页</a>|
+		<a href="detail.jsp?page=<%=prep%>&boardid=<%=board.getID()%>&topicid=<%=topic.getId() %>">上一页</a>|
 		<a href="detail.jsp?page=<%=nextp%>&boardid=<%=board.getID() %>&topicid=<%=topic.getId() %>">下一页</a>
 	</DIV>
 </DIV>

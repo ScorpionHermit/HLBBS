@@ -1,15 +1,9 @@
 package com.hlbbs.DAO;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import com.hlbbs.Modal.Post;
 import com.hlbbs.Modal.User;
 
 
@@ -101,6 +95,25 @@ public class UserDAO extends DAO {
     	return isUpdate;
     }
     
+    public boolean updateUserIntegral(){
+    	boolean isUpdate = false;
+    	try{
+        String   sql  = "update t_hlbbs_user set intIntegral=? where nvcNickName=?";
+        pstmt=m_con.prepareStatement(sql);
+        pstmt.setInt(1,user.getIntegral());
+        pstmt.setString(2, user.getName());
+        int result = pstmt.executeUpdate();
+		if(result!=0)
+			isUpdate = true;
+    	}catch(SQLException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}finally
+    	{
+    		this.ClosePreStatement(pstmt);
+    	}
+    	return isUpdate;
+    }
     /**
      * 锟睫革拷锟矫伙拷锟斤拷锟斤拷
      * @param user
@@ -247,5 +260,54 @@ public class UserDAO extends DAO {
 			this.CloseResultSet(rs);
 		}
 		return list;
+    }
+    
+    /**
+     * 查询一个用户的等级
+     * @return
+     */
+    public String getLevel() {
+    	String level = "菜鸟";
+    	String sql = "select nvcLevelName from t_hlbbs_level where intLevel=?";
+    	
+    	try {
+    		pstmt = m_con.prepareStatement(sql);
+    		pstmt.setInt(1, user.getLevel());
+    		rs = pstmt.executeQuery();
+    		
+    		if (rs.first()) {
+    			level = rs.getString("nvcLevelName");
+    		}
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	} finally {
+    		this.CloseResultSet(rs);
+    	}
+    	
+    	return level;
+    }
+    
+    /**
+     * 查询一个用户的积分
+     * @return
+     */
+    public int getIntegral() {
+    	int integral = 0;
+    	String sql = "select intIntegral from t_hlbbs_user where id=?";
+    	
+    	try {
+    		pstmt = m_con.prepareStatement(sql);
+    		pstmt.setInt(1, user.getId());
+    		rs = pstmt.executeQuery();
+    		
+    		if (rs.first()) {
+    			integral = rs.getInt("intIntegral");
+    		}
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	} finally {
+    		this.CloseResultSet(rs);
+    	}
+    	return integral;
     }
 }

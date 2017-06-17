@@ -117,8 +117,19 @@
 					<th style="width:15%">
 						<b>用户名：</b>
 						<b><%=user.getName() %></b><br>
+						<b>等级：</b>
+						<%
+							u.setLevel(user.getLevel());
+							String levelName = uDAO.getLevel();
+						%>
+						<b><%=levelName %></b><br>
 						<b>个性签名：</b>
-						<b><%=user.getPersonalizedSignature() %></b>
+						<b><%=user.getPersonalizedSignature() %></b><br>
+						<b>积分：</b>
+						<%
+							u.setId(user.getId());
+						%>
+						<b><%=uDAO.getIntegral() %></b>
 					</th>
 					<th>
 						<a href="javascript:void(0);" onclick="info()">个人信息修改</a>
@@ -232,6 +243,7 @@
 				<%
 				for (Post p : posts) {
 					u.setId(p.getPostMan());
+					post.setId(p.getId());
 					uDAO.findUserById();
 					int sectionID = p.getSectionID();
 					int commentCount = pDAO.commentCount();
