@@ -96,7 +96,7 @@
 	<div class="h">
 		您好：
 		<a href="user.jsp"><%=user.getName() %></a>
-		&nbsp;| &nbsp; <a href="manage/dologout.jsp">登出</a> |
+		&nbsp;| &nbsp; <a href="LoginoutControl">登出</a> |
 	</div>
 	
 	<div>
@@ -114,9 +114,11 @@
 					<th style="width:10%">
 						<img src="image/head/<%=user.getHeadPortrait() %>" style="margin-left:20px" />	
 					</th>
-					<th style="width:5%">
-						<b>用户名：</b><br>
-						<b><%=user.getName() %></b>
+					<th style="width:15%">
+						<b>用户名：</b>
+						<b><%=user.getName() %></b><br>
+						<b>个性签名：</b>
+						<b><%=user.getPersonalizedSignature() %></b>
 					</th>
 					<th>
 						<a href="javascript:void(0);" onclick="info()">个人信息修改</a>
