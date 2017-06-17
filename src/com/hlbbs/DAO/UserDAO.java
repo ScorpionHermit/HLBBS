@@ -17,13 +17,13 @@ import com.hlbbs.Modal.User;
 
 public class UserDAO extends DAO {
 	public User user;
-	private PreparedStatement pstmt = null;       // ÓÃÓÚÖ´ÐÐSQLÓï¾ä
-    private ResultSet         rs    = null;       // ÓÃ»§±£´æ²éÑ¯½á¹û¼¯   
+	private PreparedStatement pstmt = null;       // ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½SQLï¿½ï¿½ï¿½
+    private ResultSet         rs    = null;       // ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½   
 	
     /**
-     * Ôö¼ÓÓÃ»§
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½
      * @param user
-     * @return Ôö¼ÓÌõÊý
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public UserDAO(User u){
     	user = u;
@@ -59,9 +59,9 @@ public class UserDAO extends DAO {
 	}
     
     /**
-     * ÐÞ¸ÄÓÃ»§ÃÜÂë
+     * ï¿½Þ¸ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
      * @param user
-     * @return ¸üÐÂÌõÊý
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public boolean updateUserPwd(){
     	boolean isUpdate = false;
@@ -84,14 +84,14 @@ public class UserDAO extends DAO {
     }
     
     /**
-     * ÐÞ¸ÄÓÃ»§ÃÜÂë
+     * ï¿½Þ¸ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
      * @param user
-     * @return ¸üÐÂÌõÊý
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public boolean updateUserInf(){
     	boolean isUpdate = false;
     	try{
-        String   sql  = "update t_hlbbs_user set nvcNickName=?,nvcSex=?,nvcEmailAddress=?,nvcPersonalizedSignature=? and  where id=?";
+        String   sql  = "update t_hlbbs_user set nvcNickName=?,nvcSex=?,nvcEmailAddress=?,nvcPersonalizedSignature=? where id=?";
         pstmt=m_con.prepareStatement(sql);
         pstmt.setString(1,user.getName() );
         pstmt.setString(2, user.getSex());
@@ -113,16 +113,16 @@ public class UserDAO extends DAO {
     
     
     /**
-     * ¸ù¾ÝÓÃ»§Ãû²éÕÒÓÃ»§
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½
      * @param user
-     * @return ¸ù¾ÝÓÃ»§Ãû²éÑ¯µÄÓÃ»§¶ÔÏó
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public void findUserByName() {
         String sql  = "select * from t_hlbbs_user where nvcNickName=?";
         try {
-            pstmt = m_con.prepareStatement(sql);    // È¡µÃPreparedStatement¶ÔÏó
-            pstmt.setString(1, user.getName());             // ÉèÖÃ²ÎÊý
-            rs    = pstmt.executeQuery();          // Ö´ÐÐSQLÈ¡µÃ½á¹û¼¯
+            pstmt = m_con.prepareStatement(sql);    // È¡ï¿½ï¿½PreparedStatementï¿½ï¿½ï¿½ï¿½
+            pstmt.setString(1, user.getName());             // ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½
+            rs    = pstmt.executeQuery();          // Ö´ï¿½ï¿½SQLÈ¡ï¿½Ã½ï¿½ï¿½ï¿½ï¿½
             while( rs.next() ) {
                 user.setId(rs.getInt("id"));
                 user.setName(rs.getString("nvcNickName"));
@@ -138,7 +138,7 @@ public class UserDAO extends DAO {
             }
             
         } catch (Exception e) {
-            e.printStackTrace();                   // ´¦ÀíÒì³£
+            e.printStackTrace();                   // ï¿½ï¿½ï¿½ï¿½ï¿½ì³£
         } finally {
           this.CloseResultSet(rs);
           this.ClosePreStatement(pstmt);
@@ -147,16 +147,16 @@ public class UserDAO extends DAO {
     }
     
     /**
-     * ¸ù¾ÝÓÃ»§id²éÕÒÓÃ»§
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½idï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½
      * @param user
-     * @return ¸ù¾Ýuid²éÑ¯µÄÓÃ»§¶ÔÏó
+     * @return ï¿½ï¿½ï¿½ï¿½uidï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public void findUserById() {
         String sql  = "select * from t_hlbbs_user where id=?";
         try {
-            pstmt = m_con.prepareStatement(sql);      //È¡µÃPreparedStatement¶ÔÏó
-            pstmt.setInt(1, user.getId());            //ÉèÖÃ²ÎÊý
-            rs    = pstmt.executeQuery();             //Ö´ÐÐSQLÈ¡µÃ½á¹û¼¯
+            pstmt = m_con.prepareStatement(sql);      //È¡ï¿½ï¿½PreparedStatementï¿½ï¿½ï¿½ï¿½
+            pstmt.setInt(1, user.getId());            //ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½
+            rs    = pstmt.executeQuery();             //Ö´ï¿½ï¿½SQLÈ¡ï¿½Ã½ï¿½ï¿½ï¿½ï¿½
             while( rs.next() ) {
                 user.setId(rs.getInt("id"));
                 user.setName(rs.getString("nvcNickName"));
@@ -171,9 +171,9 @@ public class UserDAO extends DAO {
                 user.setRegistertime(rs.getString("dtmRegTime"));
             }
         } catch (Exception e) {
-            e.printStackTrace();                     // ´¦ÀíÒì³£
+            e.printStackTrace();                     // ï¿½ï¿½ï¿½ï¿½ï¿½ì³£
         } finally {
-            this.CloseResultSet(rs);         // ÊÍ·Å×ÊÔ´
+            this.CloseResultSet(rs);         // ï¿½Í·ï¿½ï¿½ï¿½Ô´
             this.ClosePreStatement(pstmt);
         }        
     }
