@@ -100,7 +100,7 @@ User loginUser = (User)session.getAttribute("user");
 				u.setId(p.getPostMan());
 				uDAO.findUserById();
 				comment.setPostsId(p.getId());
-				int commentCount = 5;
+				int commentCount = cDAO.getCountByPostId();
 			%>
 			<tr class="tr3">
 				<td><img src="image/topic.gif" border=0></td>

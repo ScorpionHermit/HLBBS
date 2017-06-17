@@ -48,6 +48,7 @@
 		您好：
 		<a href="user.jsp"><%=user.getName() %></a>
 		&nbsp;| &nbsp; <a href="LoginoutControl">登出</a> |
+		&nbsp; <a href="user.jsp">我的空间</a> |
 	<%
 		if(user.getRoleType() == Role.WebManager)
 		{
