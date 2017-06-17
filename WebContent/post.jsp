@@ -79,6 +79,7 @@ function check(){
 </script>
 </HEAD>
 
+
 <BODY onload="load()">
 	<DIV>
 		<IMG  style="width:250px" src="image/logo.png">

@@ -78,20 +78,23 @@ public class PostDAO extends DAO {
 	 * 删除帖子
 	 * @return
 	 */
-	public int deleteComment() {
+	public boolean deletePost() {
 		int result =0;
-		String sql="delete from t_hlbbs_posts where id=?";
+		boolean isSuccess = false;
+		String sql="delete from t_hlbbs_posts where id= ? ";
 		try {
 			pStatement=m_con.prepareStatement(sql);
 			pStatement.setInt(1, post.getId());
 			result=pStatement.executeUpdate();
+			if(result > 0)
+				isSuccess = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			this.ClosePreStatement(pStatement);
 		}
 		
-		return result;
+		return isSuccess;
 	}
 	
 	/**
@@ -117,6 +120,41 @@ public class PostDAO extends DAO {
 		}
 		
 		return count;
+	}
+	
+	/**
+	 * 查询所有帖子
+	 * @return
+	 */
+	public ArrayList<Post> getAllPost()
+	{
+		String sql="select * from t_hlbbs_posts";
+		ArrayList<Post> list =new ArrayList<Post>();
+		
+		try {
+			pStatement=m_con.prepareStatement(sql);
+			rSet =pStatement.executeQuery();
+			
+			while (rSet.next()) 
+			{
+				Post p = new Post();
+				p.setId(rSet.getInt("id"));
+				p.setTitle(rSet.getString("nvcTitle"));
+				p.setPostMan(rSet.getInt("intPostman"));
+				p.setContent(rSet.getString("nvcContent"));
+				p.setPostTime(rSet.getString("dtmPostTime"));
+				p.setFinalReplyTime(rSet.getString("dtmFinalReplyTime"));
+				p.setReplyCount(rSet.getInt("intReplyCount"));
+				p.setSectionID(rSet.getInt("intSectionId"));
+				p.setIsBoutique(rSet.getInt("intIsBoutique"));
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			this.ClosePreStatement(pStatement);
+		}
+		return list;
 	}
 	
 	/**
