@@ -38,7 +38,7 @@ if(action.equals("show"))
 {
 	showDetail(request, response);
 	request.getRequestDispatcher("detail.jsp").forward(request, response);
-	
+	return;
 	}
 		
 	}

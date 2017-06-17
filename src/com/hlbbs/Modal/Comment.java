@@ -1,6 +1,8 @@
 package com.hlbbs.Modal;
 
-public class Comment { 
+import java.io.Serializable;
+
+public class Comment implements Serializable{ 
 	private int id; //id
 	private int userId; //ÆÀÂÛÕßid
 	private int postsId; //Ìû×Óid

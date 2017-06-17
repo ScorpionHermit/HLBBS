@@ -46,12 +46,13 @@ public class CommentDAO extends DAO
 	public int editComment()
 	{
 		int result = 0;
-		String sql = "update t_hlbbs_comment set nvcContent=? where id =?";
+		String sql = "update t_hlbbs_comment set nvcContent=?,nvcTitle=? where id =?";
 		try
 		{
 			pStatement = m_con.prepareStatement(sql);
 			pStatement.setString(1, comment.getContent());
-			pStatement.setInt(2, comment.getId());
+			pStatement.setString(2, comment.getTitle());
+			pStatement.setInt(3, comment.getId());
 			result = pStatement.executeUpdate();
 		} catch (SQLException e)
 		{
@@ -187,9 +188,10 @@ public class CommentDAO extends DAO
 		return list;
 	}
 
-	public Comment searchById()
+	public boolean searchById()
 	{
 		String sql = "select * from t_hlbbs_comment where id=?";
+		boolean issuccess=false;
 		try
 		{
 			pStatement = m_con.prepareStatement(sql);
@@ -204,6 +206,7 @@ public class CommentDAO extends DAO
 				comment.setContent(rSet.getString("nvcContent"));
 				comment.setBuildingNum(rSet.getInt("intBuildingNum"));
 				comment.setTitle(rSet.getString("nvcTitle"));
+				issuccess=true;
 			}
 		} catch (SQLException e)
 		{
@@ -213,7 +216,7 @@ public class CommentDAO extends DAO
 		{
 			this.ClosePreStatement(pStatement);
 		}
-		return comment;
+		return issuccess;
 	}
 
 }
