@@ -19,12 +19,13 @@ public class CommentDAO extends DAO{
 	public int addComment()
 	{
 		int result=0;
-		String sql ="insert into t_hlbbs_comment(intUserId,intPostsId,nvcContent) values(?,?,?)";
+		String sql ="insert into t_hlbbs_comment(intUserId,intPostsId,nvcContent,nvcTitle) values(?,?,?,?)";
 		try {
 			pStatement=m_con.prepareStatement(sql);
 			pStatement.setInt(1, comment.getUserId());
 			pStatement.setInt(2, comment.getPostsId());
 			pStatement.setString(3, comment.getContent());
+			pStatement.setString(4, comment.getTitle());
 			result= pStatement.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -85,14 +86,15 @@ public int deleteComment()
 			rSet =pStatement.executeQuery();
 			while(rSet.next())
 			{
-				comment.setId(rSet.getInt("id"));
-				comment.setUserId(rSet.getInt("intUserId"));
-				comment.setPostsId(rSet.getInt("intPostsId"));
-		        comment.setComTime(rSet.getString("dtmComTime"));
-		        comment.setContent(rSet.getString("nvcContent"));
-		        comment.setBuildingNum(rSet.getInt("intBuildingNum"));
-		        comment.setTitle(rSet.getString("nvcTitle"));
-		        list.add(comment);
+				Comment com=new Comment();
+				com.setId(rSet.getInt("id"));
+				com.setUserId(rSet.getInt("intUserId"));
+				com.setPostsId(rSet.getInt("intPostsId"));
+		        com.setComTime(rSet.getString("dtmComTime"));
+		        com.setContent(rSet.getString("nvcContent"));
+		        com.setBuildingNum(rSet.getInt("intBuildingNum"));
+		        com.setTitle(rSet.getString("nvcTitle"));
+		        list.add(com);
 		        
 			}
 		} catch (SQLException e) {
@@ -120,15 +122,15 @@ public int deleteComment()
 			rSet =pStatement.executeQuery();
 			while(rSet.next())
 			{
-				comment.setId(rSet.getInt("id"));
-				comment.setUserId(rSet.getInt("intUserId"));
-				comment.setPostsId(rSet.getInt("intPostsId"));
-		        comment.setComTime(rSet.getString("dtmComTime"));
-		        comment.setContent(rSet.getString("nvcContent"));
-		        comment.setBuildingNum(rSet.getInt("intBuildingNum"));
-		        comment.setTitle(rSet.getString("nvcTitle"));
-		        list.add(comment);
-		        
+				Comment com=new Comment();
+				com.setId(rSet.getInt("id"));
+				com.setUserId(rSet.getInt("intUserId"));
+				com.setPostsId(rSet.getInt("intPostsId"));
+		        com.setComTime(rSet.getString("dtmComTime"));
+		        com.setContent(rSet.getString("nvcContent"));
+		        com.setBuildingNum(rSet.getInt("intBuildingNum"));
+		        com.setTitle(rSet.getString("nvcTitle"));
+		        list.add(com);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -148,7 +150,7 @@ public int deleteComment()
 			pStatement=m_con.prepareStatement(sql);
 			pStatement.setInt(1, comment.getId());
 			rSet =pStatement.executeQuery();
-			if(rSet.next())
+			if(rSet.first())
 			{
 				comment.setId(rSet.getInt("id"));
 				comment.setUserId(rSet.getInt("intUserId"));

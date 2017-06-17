@@ -38,7 +38,7 @@ public class PostControl extends HttpServlet {
 		String   content   = request.getParameter("content");           // 取得帖子内容
 		
 		User     user      = (User)request.getSession().getAttribute("user");        // 从session中取得登录用户
-		int     boardId    = Integer.parseInt( request.getParameter("boardId") ); // 取得版块id
+		int     boardId    = Integer.parseInt( request.getParameter("boardid") ); // 取得版块id
 
 		if( user!=null ) {                                                 // 判断用户是否已经登录
 			Post post = new Post();

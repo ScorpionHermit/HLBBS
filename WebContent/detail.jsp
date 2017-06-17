@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=GBK"
-    pageEncoding="GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
     <%@page import="java.util.*" %>
     <%@page import="com.hlbbs.Modal.*"%>
     <%@page import="com.hlbbs.DAO.*" %>
@@ -17,7 +17,7 @@ Section board =(Section)request.getAttribute("board");
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ÜöÁéBBS--¿´Ìù</title>
+<title>èŸçµBBS--çœ‹è´´</title>
 <Link rel="stylesheet" type="text/css" href="style/style.css" />
 </HEAD>
 
@@ -26,48 +26,48 @@ Section board =(Section)request.getAttribute("board");
 	<IMG src="image/logo.gif">
 </DIV>
 
-<!--      ÓÃ»§ĞÅÏ¢¡¢µÇÂ¼¡¢×¢²á        -->
+<!--      ç”¨æˆ·ä¿¡æ¯ã€ç™»å½•ã€æ³¨å†Œ        -->
 <%
 if(session.getAttribute("user") == null){
 %>
 	<DIV class="h">
-		ÄúÉĞÎ´¡¡<a href="login.jsp">µÇÂ¼</a>
-		&nbsp;| &nbsp; <A href="reg.jsp">×¢²á</A> |
+		æ‚¨å°šæœªã€€<a href="login.jsp">ç™»å½•</a>
+		&nbsp;| &nbsp; <A href="reg.jsp">æ³¨å†Œ</A> |
 	</DIV>
 <%
 } else {
 	User loginUser = (User)session.getAttribute("user");
 %>
 	<DIV class="h">
-		ÄúºÃ£º¡¡<%=loginUser.getName() %>
-		&nbsp;| &nbsp; <A href="manage/doLogout.jsp">µÇ³ö</A> |
+		æ‚¨å¥½ï¼šã€€<%=loginUser.getName() %>
+		&nbsp;| &nbsp; <A href="manage/doLogout.jsp">ç™»å‡º</A> |
 	</DIV>
 <%
 }
 %>
-<!--      Ö÷Ìå        -->
+<!--      ä¸»ä½“        -->
 <DIV><br/>
-<!--      µ¼º½        -->
+<!--      å¯¼èˆª        -->
 <DIV>
-	&gt;&gt;<B><a href="index.jsp">ÂÛÌ³Ê×Ò³</a></B>&gt;&gt;
-	<B><a href="list.jsp?page=1&boardId=<%=board.getID() %>"><%=board.getNvcSectionName() %></a></B>
+	&gt;&gt;<B><a href="index.jsp">è®ºå›é¦–é¡µ</a></B>&gt;&gt;
+	<B><a href="list.jsp?page=1&boardid=<%=board.getID() %>"><%=board.getNvcSectionName() %></a></B>
 </DIV>
 	<br/>
-	<!--      »Ø¸´¡¢ĞÂÌû        -->
+	<!--      å›å¤ã€æ–°å¸–        -->
 	<DIV>
-		<A href="post.jsp?post=newreply&topicId=<%=topic.getId() %>&boardId=<%=board.getID()%>"><IMG src="image/reply.gif" border="0"></A> 
-		<A href="post.jsp?post=newtopic&boardId=<%=board.getID() %>"><IMG src="image/post.gif" border="0"></A>
+		<A href="post.jsp?post=newreply&topicid=<%=topic.getId() %>&boardid=<%=board.getID()%>"><IMG src="image/reply.gif" border="0"></A> 
+		<A href="post.jsp?post=newtopic&boardid=<%=board.getID() %>"><IMG src="image/post.gif" border="0"></A>
 	</DIV>
-	<!--         ·­ Ò³         -->
+	<!--         ç¿» é¡µ         -->
 	<DIV>
-		<a href="detail.jsp?page=<%=prep%>&boardId=<%=board.getID() %>&topicId=<%=topic.getId()%>">ÉÏÒ»Ò³</a>|
-		<a href="detail.jsp?page=<%=nextp%>&boardId=<%=board.getID() %>&topicId=<%=topic.getId() %>">ÏÂÒ»Ò³</a>
+		<a href="detail.jsp?page=<%=prep%>&boardid=<%=board.getID() %>&topicid=<%=topic.getId()%>">ä¸Šä¸€é¡µ</a>|
+		<a href="detail.jsp?page=<%=nextp%>&boardid=<%=board.getID() %>&topicid=<%=topic.getId() %>">ä¸‹ä¸€é¡µ</a>
 	</DIV>
-	<!--      ±¾Ò³Ö÷ÌâµÄ±êÌâ        -->
+	<!--      æœ¬é¡µä¸»é¢˜çš„æ ‡é¢˜        -->
 	<DIV>
 		<TABLE cellSpacing="0" cellPadding="0" width="100%">
 			<TR>
-				<TH class="h">±¾Ò³Ö÷Ìâ: <%=topic.getTitle() %></TH>
+				<TH class="h">æœ¬é¡µä¸»é¢˜: <%=topic.getTitle() %></TH>
 			</TR>
 			<TR class="tr2">
 				<TD>&nbsp;</TD>
@@ -75,7 +75,7 @@ if(session.getAttribute("user") == null){
 		</TABLE>
 	</DIV>
 	
-	<!--      Ö÷Ìâ        -->
+	<!--      ä¸»é¢˜        -->
 	<%
 	if(p==1){ 
 	%>
@@ -85,17 +85,17 @@ if(session.getAttribute("user") == null){
 				<TH style="WIDTH: 20%">
 					<B><%=user.getName() %></B><BR/>
 					<img src="image/head/<%=user.getHeadPortrait()%>"/><BR/>
-					×¢²á:<%=user.getRegistertime().substring(0,10) %><BR/>
+					æ³¨å†Œ:<%=user.getRegistertime().substring(0,10) %><BR/>
 				</TH>
 				<TH>
 					<H4><%=topic.getTitle() %></H4>
 					<DIV><pre><%=topic.getContent() %></pre></DIV>
 					<DIV class="tipad gray">
-						·¢±í£º[<%=topic.getPostTime().substring(0,16) %>] &nbsp;
+						å‘è¡¨ï¼š[<%=topic.getPostTime().substring(0,16) %>] &nbsp;
 						<%if(topic.getFinalReplyTime()!=null)
 						{
 							%>
-						×îºóĞŞ¸Ä:[<%=topic.getFinalReplyTime().substring(0,16) %>]
+						æœ€åä¿®æ”¹:[<%=topic.getFinalReplyTime().substring(0,16) %>]
 						<%} %>
 					</DIV>
 				</TH>
@@ -103,17 +103,17 @@ if(session.getAttribute("user") == null){
 		</TABLE>
 	</DIV>
 	
-	<!--      »Ø¸´        -->
+	<!--      å›å¤        -->
 	<%
 	}
 	if(listReply!=null)
 	{
 	for( int i=0; i<listReply.size(); i++ ) {
-		Comment reply    = (Comment)listReply.get(i);                   // Ñ­»·È¡µÃ»Ø¸´ĞÅÏ¢
+		Comment reply    = (Comment)listReply.get(i);                   // å¾ªç¯å–å¾—å›å¤ä¿¡æ¯
         User replyUser =new User();
 		replyUser.setId(reply.getUserId());
 		UserDAO uDao =new UserDAO(replyUser);
-		 uDao.findUserById(); // È¡µÃ»Ø¸´µÄ×÷Õß
+		 uDao.findUserById(); // å–å¾—å›å¤çš„ä½œè€…
 	%>
 	<DIV class="t">
 		<TABLE style="BORDER-TOP-WIDTH: 0px; TABLE-LAYOUT: fixed" cellSpacing="0" cellPadding="0" width="100%">
@@ -122,17 +122,17 @@ if(session.getAttribute("user") == null){
 					<B><%=replyUser.getName() %></B><BR/><BR/>
 				<img src="image/head/<%=replyUser.getHeadPortrait()%>">
 				<BR/>
-					×¢²áÊ±¼ä:<%=user.getRegistertime().substring(0,10)%><BR/>
+					æ³¨å†Œæ—¶é—´:<%=user.getRegistertime().substring(0,10)%><BR/>
 				</TH>
 				<TH>
 					<H4><%=reply.getTitle() %></H4>
 					<DIV><pre><%=reply.getContent() %></pre></DIV>
 					<DIV class="tipad gray">
-						·¢±í£º[<%=reply.getComTime().substring(0,16) %>] &nbsp;
-						×îºóĞŞ¸Ä:[<%=topic.getFinalReplyTime().substring(0,16) %>]
+						å‘è¡¨ï¼š[<%=reply.getComTime().substring(0,16) %>] &nbsp;
+						æœ€åä¿®æ”¹:[<%=topic.getFinalReplyTime().substring(0,16) %>]
 						
-						<A href="manage/doDeleteReply.jsp?boardId=<%=board.getID()%>&replyId=<%=reply.getId()%>">[É¾³ı]</A>
-						<A href="update.jsp?tipType=reply&boardId=<%=board.getID()%>&replyId=<%=reply.getId()%>">[ĞŞ¸Ä]</A>
+						<A href="manage/doDeleteReply.jsp?boardid=<%=board.getID()%>&replyid=<%=reply.getId()%>">[åˆ é™¤]</A>
+						<A href="update.jsp?tipType=reply&boardid=<%=board.getID()%>&replyid=<%=reply.getId()%>">[ä¿®æ”¹]</A>
 					</DIV>
 				</TH>
 			</TR>
@@ -140,13 +140,13 @@ if(session.getAttribute("user") == null){
 	</DIV>
 	<%} }%>
 	<DIV>
-		<a href="detail.jsp?page=<%=prep%>&boardId=<%=board.getID() %>&topicId=<%=topic.getId() %>">ÉÏÒ»Ò³</a>|
-		<a href="detail.jsp?page=<%=nextp%>&boardId=<%=board.getID() %>&topicId=<%=topic.getId() %>">ÏÂÒ»Ò³</a>
+		<a href="detail.jsp?page=<%=prep%>&boardid=<%=board.getID() %>&topicid=<%=topic.getId() %>">ä¸Šä¸€é¡µ</a>|
+		<a href="detail.jsp?page=<%=nextp%>&boardid=<%=board.getID() %>&topicid=<%=topic.getId() %>">ä¸‹ä¸€é¡µ</a>
 	</DIV>
 </DIV>
 
-<!--      ÉùÃ÷        -->
+<!--      å£°æ˜        -->
 <BR>
-<CENTER class="gray">°æÈ¨ËùÓĞ</CENTER>
+<CENTER class="gray">ç‰ˆæƒæ‰€æœ‰</CENTER>
 </BODY>
 </html>

@@ -32,7 +32,7 @@ public class DetailControl extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("GBK");
+		request.setCharacterEncoding("utf-8");
 String action =request.getParameter("action");
 if(action.equals("show"))
 {

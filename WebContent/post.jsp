@@ -21,14 +21,16 @@ section.setID(id);// 取得版块信息
 SectionDAO sectionDAO   = new SectionDAO(section);
 sectionDAO.findBoardByID();// 得到版块Dao的实例
 
-String   topicId    = request.getParameter("topicId")==null ? "": request.getParameter("topicId");
-String   formAction = request.getParameter("post").equals("newreply")? "manage/doReply.jsp":"PostControl";
+String   topicId    = request.getParameter("topicid")==null ? "": request.getParameter("topicid");
+String action =request.getParameter("post").equals("newreply")?"回复帖子":"发布帖子";
+
+String   formAction = request.getParameter("post").equals("newreply")? "ReplyControl":"PostControl";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML>
 <HEAD>
-<TITLE>青鸟学员论坛--发布帖子</TITLE>
+<TITLE>青鸟学员论坛--<%=action %></TITLE>
 <META http-equiv=Content-Type content="text/html; charset=gbk">
 <Link rel="stylesheet" type="text/css" href="style/style.css" />
 <script type="text/javascript">
@@ -45,6 +47,12 @@ function check(){
 		alert("长度不能大于1000");
 		return false;
 	}
+	var action="<%=formAction%>";
+	document.postForm.action=action;
+	if(action=="ReplyControl")
+		{
+		document.postForm.option.value="newreply";
+		}
 }
 </script>
 </HEAD>
@@ -81,13 +89,14 @@ if(request.getSession().getAttribute("user") == null){
 		<B><a href="list.jsp?page=1&boardid=<%=id%>"><%=section.getNvcSectionName() %></a></B>
 	</DIV><BR/>
 	<DIV>
-		<FORM name="postForm" onSubmit="return check()" action="PostControl" method="POST"> 
-			<INPUT type="hidden" name="boardId" value="<%=id%>"/>
-			<INPUT type="hidden" name="topicId" value="<%=topicId%>"/>
+		<FORM name="postForm" onSubmit="return check()" action="" method="POST"> 
+			<INPUT type="hidden" name="boardid" value="<%=id%>"/>
+			<INPUT type="hidden" name="topicid" value="<%=topicId%>"/>
+			<input type="hidden" name="option" value="">
 			<DIV class="t">
 				<TABLE cellSpacing="0" cellPadding="0" align="center">
 				    <TR>
-					    <TD class="h" colSpan="3"><B>发表帖子</B></TD>
+					    <TD class="h" colSpan="3"><B><%=action %></B></TD>
 				    </TR>
 	
 				    <TR class="tr3">
