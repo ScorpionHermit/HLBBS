@@ -36,6 +36,7 @@ public class SignControl extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		boolean isSign = false;
 		Sign sign = new Sign();
 		User user = (User)request.getSession().getAttribute("user");
 		sign.setUserId(user.getId());
@@ -49,6 +50,7 @@ public class SignControl extends HttpServlet {
         user.setIntegral(user.getIntegral()+1); 
 		UserDAO ud = new UserDAO(user);
 		ud.updateUserIntegral();
+		isSign = true;
 		}
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         java.util.Date now = new java.sql.Timestamp(new Date().getTime());
@@ -72,9 +74,10 @@ public class SignControl extends HttpServlet {
     		ud.updateUserIntegral();
     		
     		sd.updateSign();
+    		isSign = true;
     		
         }
-		request.getRequestDispatcher("index.jsp").forward(request,response);
+        response.sendRedirect("index.jsp?isSign="+isSign+"");
 		
 		}
 
