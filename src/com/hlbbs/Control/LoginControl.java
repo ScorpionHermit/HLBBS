@@ -42,7 +42,9 @@ public class LoginControl extends HttpServlet {
 		User     user      = (User)request.getSession().getAttribute("user");        // 从session中取得登录用户
 		UserDAO ud = new UserDAO(u);
 		
-		if(user==null){
+		String S1=(String)request.getSession().getAttribute("authCode");
+		String S2=request.getParameter("authimg");
+		if(user==null&&S2.equals(S1)){
 			ud.findUserByName();
 			if( ud.user!=null && ud.user.getPassWord().equals(pwd) ) {
 				request.getSession().setAttribute("user", ud.user);                     // 如果查找的用户不为空并且密码正确，保存用户信息

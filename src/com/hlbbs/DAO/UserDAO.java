@@ -17,13 +17,13 @@ import com.hlbbs.Modal.User;
 
 public class UserDAO extends DAO {
 	public User user;
-	private PreparedStatement pstmt = null;       // ����ִ��SQL���
-    private ResultSet         rs    = null;       // �û������ѯ�����   
+	private PreparedStatement pstmt = null;       // 锟斤拷锟斤拷执锟斤拷SQL锟斤拷锟�
+    private ResultSet         rs    = null;       // 锟矫伙拷锟斤拷锟斤拷锟窖拷锟斤拷锟斤拷   
 	
     /**
-     * �����û�
+     * 锟斤拷锟斤拷锟矫伙拷
      * @param user
-     * @return ��������
+     * @return 锟斤拷锟斤拷锟斤拷锟斤拷
      */
     public UserDAO(User u){
     	user = u;
@@ -59,9 +59,9 @@ public class UserDAO extends DAO {
 	}
     
     /**
-     * �޸��û�����
+     * 锟睫革拷锟矫伙拷锟斤拷锟斤拷
      * @param user
-     * @return ��������
+     * @return 锟斤拷锟斤拷锟斤拷锟斤拷
      */
     public boolean updateUserPwd(){
     	boolean isUpdate = false;
@@ -83,10 +83,29 @@ public class UserDAO extends DAO {
     	return isUpdate;
     }
     
+    public boolean updateUserIntegral(){
+    	boolean isUpdate = false;
+    	try{
+        String   sql  = "update t_hlbbs_user set intIntegral=? where nvcNickName=?";
+        pstmt=m_con.prepareStatement(sql);
+        pstmt.setInt(1,user.getIntegral());
+        pstmt.setString(2, user.getName());
+        int result = pstmt.executeUpdate();
+		if(result!=0)
+			isUpdate = true;
+    	}catch(SQLException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}finally
+    	{
+    		this.ClosePreStatement(pstmt);
+    	}
+    	return isUpdate;
+    }
     /**
-     * �޸��û�����
+     * 锟睫革拷锟矫伙拷锟斤拷锟斤拷
      * @param user
-     * @return ��������
+     * @return 锟斤拷锟斤拷锟斤拷锟斤拷
      */
     public boolean updateUserInf(){
     	boolean isUpdate = false;
@@ -113,16 +132,16 @@ public class UserDAO extends DAO {
     
     
     /**
-     * �����û��������û�
+     * 锟斤拷锟斤拷锟矫伙拷锟斤拷锟斤拷锟斤拷锟矫伙拷
      * @param user
-     * @return �����û�����ѯ���û�����
+     * @return 锟斤拷锟斤拷锟矫伙拷锟斤拷锟斤拷询锟斤拷锟矫伙拷锟斤拷锟斤拷
      */
     public void findUserByName() {
         String sql  = "select * from t_hlbbs_user where nvcNickName=?";
         try {
-            pstmt = m_con.prepareStatement(sql);    // ȡ��PreparedStatement����
-            pstmt.setString(1, user.getName());             // ���ò���
-            rs    = pstmt.executeQuery();          // ִ��SQLȡ�ý����
+            pstmt = m_con.prepareStatement(sql);    // 取锟斤拷PreparedStatement锟斤拷锟斤拷
+            pstmt.setString(1, user.getName());             // 锟斤拷锟矫诧拷锟斤拷
+            rs    = pstmt.executeQuery();          // 执锟斤拷SQL取锟矫斤拷锟斤拷锟�
             while( rs.next() ) {
                 user.setId(rs.getInt("id"));
                 user.setName(rs.getString("nvcNickName"));
@@ -138,7 +157,7 @@ public class UserDAO extends DAO {
             }
             
         } catch (Exception e) {
-            e.printStackTrace();                   // �����쳣
+            e.printStackTrace();                   // 锟斤拷锟斤拷锟届常
         } finally {
           this.CloseResultSet(rs);
           this.ClosePreStatement(pstmt);
@@ -147,16 +166,16 @@ public class UserDAO extends DAO {
     }
     
     /**
-     * �����û�id�����û�
+     * 锟斤拷锟斤拷锟矫伙拷id锟斤拷锟斤拷锟矫伙拷
      * @param user
-     * @return ����uid��ѯ���û�����
+     * @return 锟斤拷锟斤拷uid锟斤拷询锟斤拷锟矫伙拷锟斤拷锟斤拷
      */
     public void findUserById() {
         String sql  = "select * from t_hlbbs_user where id=?";
         try {
-            pstmt = m_con.prepareStatement(sql);      //ȡ��PreparedStatement����
-            pstmt.setInt(1, user.getId());            //���ò���
-            rs    = pstmt.executeQuery();             //ִ��SQLȡ�ý����
+            pstmt = m_con.prepareStatement(sql);      //取锟斤拷PreparedStatement锟斤拷锟斤拷
+            pstmt.setInt(1, user.getId());            //锟斤拷锟矫诧拷锟斤拷
+            rs    = pstmt.executeQuery();             //执锟斤拷SQL取锟矫斤拷锟斤拷锟�
             while( rs.next() ) {
                 user.setId(rs.getInt("id"));
                 user.setName(rs.getString("nvcNickName"));
@@ -171,9 +190,9 @@ public class UserDAO extends DAO {
                 user.setRegistertime(rs.getString("dtmRegTime"));
             }
         } catch (Exception e) {
-            e.printStackTrace();                     // �����쳣
+            e.printStackTrace();                     // 锟斤拷锟斤拷锟届常
         } finally {
-            this.CloseResultSet(rs);         // �ͷ���Դ
+            this.CloseResultSet(rs);         // 锟酵凤拷锟斤拷源
             this.ClosePreStatement(pstmt);
         }        
     }
