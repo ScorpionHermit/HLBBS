@@ -46,7 +46,7 @@
 	%>
 	<div class="h">
 		您好：
-		<%=user.getName() %>
+		<a href="user.jsp"><%=user.getName() %></a>
 		&nbsp;| &nbsp; <a href="LoginoutControl">登出</a> |
 	<%
 		if(user.getRoleType() == Role.WebManager)
