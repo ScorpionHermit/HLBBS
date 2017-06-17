@@ -196,5 +196,53 @@ public class UserDAO extends DAO {
             this.ClosePreStatement(pstmt);
         }        
     }
-
+    
+    /**
+     * 查询一个用户的等级
+     * @return
+     */
+    public String getLevel() {
+    	String level = "菜鸟";
+    	String sql = "select nvcLevelName from t_hlbbs_level where intLevel=?";
+    	
+    	try {
+    		pstmt = m_con.prepareStatement(sql);
+    		pstmt.setInt(1, user.getLevel());
+    		rs = pstmt.executeQuery();
+    		
+    		if (rs.first()) {
+    			level = rs.getString("nvcLevelName");
+    		}
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	} finally {
+    		this.CloseResultSet(rs);
+    	}
+    	
+    	return level;
+    }
+    
+    /**
+     * 查询一个用户的积分
+     * @return
+     */
+    public int getIntegral() {
+    	int integral = 0;
+    	String sql = "select intIntegral from t_hlbbs_user where id=?";
+    	
+    	try {
+    		pstmt = m_con.prepareStatement(sql);
+    		pstmt.setInt(1, user.getId());
+    		rs = pstmt.executeQuery();
+    		
+    		if (rs.first()) {
+    			integral = rs.getInt("intIntegral");
+    		}
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	} finally {
+    		this.CloseResultSet(rs);
+    	}
+    	return integral;
+    }
 }

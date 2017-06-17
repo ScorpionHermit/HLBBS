@@ -16,11 +16,7 @@
 	SectionDAO secDAO = new SectionDAO(section);
 	ArrayList<Section> secs = secDAO.getAllSection();
 %>
-<<script type="text/javascript">
-  function sign(){
-	  
-  }
-</script>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <html>
 <head>
@@ -53,7 +49,7 @@
 		<a href="user.jsp"><%=user.getName() %></a>
 		&nbsp;|&nbsp; <a href="LoginoutControl">登出</a> |
 		&nbsp;&nbsp;  <a href="user.jsp">我的空间</a> |
-		&nbsp;&nbsp; <a href="SignControl" onclick="return false;alert('签到成功')">签到</a> |
+		&nbsp;&nbsp; <a href="SignControl">签到</a> |
 	<%
 		if(user.getRoleType() == Role.WebManager)
 		{
