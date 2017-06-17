@@ -228,7 +228,7 @@ public class UserDAO extends DAO {
      */
     public int getIntegral() {
     	int integral = 0;
-    	String sql = "select intIntegral from t_hlbbs_level where intLevel=?";
+    	String sql = "select intIntegral from t_hlbbs_user where id=?";
     	
     	try {
     		pstmt = m_con.prepareStatement(sql);

@@ -119,13 +119,16 @@
 						<b><%=user.getName() %></b><br>
 						<b>等级：</b>
 						<%
-							int level = user.getLevel();
+							u.setLevel(user.getLevel());
 							String levelName = uDAO.getLevel();
 						%>
 						<b><%=levelName %></b><br>
 						<b>个性签名：</b>
 						<b><%=user.getPersonalizedSignature() %></b><br>
 						<b>积分：</b>
+						<%
+							u.setId(user.getId());
+						%>
 						<b><%=uDAO.getIntegral() %></b>
 					</th>
 					<th>
@@ -240,6 +243,7 @@
 				<%
 				for (Post p : posts) {
 					u.setId(p.getPostMan());
+					post.setId(p.getId());
 					uDAO.findUserById();
 					int sectionID = p.getSectionID();
 					int commentCount = pDAO.commentCount();

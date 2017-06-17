@@ -243,13 +243,14 @@ public class PostDAO extends DAO {
 		}
 		return issuccess;
 	}
+	
 	/**
 	 * 查询一个帖子的评论数
 	 * @return
 	 */
 	public int commentCount()
 	{
-		String sql = "select count(*) from ( select * from  t_hlbbs_comment com where com.intPostsId=?) as total";
+		String sql = "select count(*) from t_hlbbs_comment where intPostsId=?";
 		int rowCount = 0;   
 		try {
 			pStatement=m_con.prepareStatement(sql);
@@ -258,7 +259,7 @@ public class PostDAO extends DAO {
 			 
 			if(rSet.next())    
 			{    
-			    rowCount=rSet.getInt("total");    
+			    rowCount=rSet.getInt(1);    
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
