@@ -249,7 +249,7 @@ public class PostDAO extends DAO {
 	 */
 	public int commentCount()
 	{
-		String sql = "select count(*) from ( select * from  t_hlbbs_comment com where com.intPostsId=?) as total";
+		String sql = "SELECT COUNT(id) AS commentCount FROM t_hlbbs_comment WHERE intPostsId=?";
 		int rowCount = 0;   
 		try {
 			pStatement=m_con.prepareStatement(sql);
@@ -258,7 +258,7 @@ public class PostDAO extends DAO {
 			 
 			if(rSet.next())    
 			{    
-			    rowCount=rSet.getInt("total");    
+			    rowCount=rSet.getInt("commentCount");    
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

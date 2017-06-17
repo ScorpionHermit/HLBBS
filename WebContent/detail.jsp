@@ -33,7 +33,7 @@ function del(){
 
 <BODY>
 <DIV>
-	<IMG style="width:250px" src="image/logo.gif">
+	<IMG style="width:250px" src="image/logo.png">
 </DIV>
 
 <!--      用户信息、登录、注册        -->
@@ -50,7 +50,7 @@ if(session.getAttribute("user") == null){
 %>
 	<DIV class="h">
 		您好：　<%=loginUser.getName() %>
-		&nbsp;| &nbsp; <A href="manage/doLogout.jsp">登出</A> |
+		&nbsp;| &nbsp; <a href="LoginoutControl">登出</A> |
 	</DIV>
 <%
 }
@@ -68,11 +68,7 @@ if(session.getAttribute("user") == null){
 		<A href="post.jsp?post=newreply&topicid=<%=topic.getId() %>&boardid=<%=board.getID()%>"><IMG src="image/reply.gif" border="0"></A> 
 		<A href="post.jsp?post=newtopic&boardid=<%=board.getID() %>"><IMG src="image/post.gif" border="0"></A>
 	</DIV>
-	<!--         翻 页         -->
-	<DIV>
-		<a href="detail.jsp?page=<%=prep%>&boardid=<%=board.getID() %>&topicid=<%=topic.getId()%>">上一页</a>|
-		<a href="detail.jsp?page=<%=nextp%>&boardid=<%=board.getID() %>&topicid=<%=topic.getId() %>">下一页</a>
-	</DIV>
+	
 	<!--      本页主题的标题        -->
 	<DIV>
 		<TABLE cellSpacing="0" cellPadding="0" width="100%">
@@ -150,8 +146,8 @@ if(session.getAttribute("user") == null){
 	</DIV>
 	<%} }%>
 	<DIV>
-		<a href="detail.jsp?page=<%=prep%>&boardid=<%=board.getID()%>&topicid=<%=topic.getId() %>">上一页</a>|
-		<a href="detail.jsp?page=<%=nextp%>&boardid=<%=board.getID() %>&topicid=<%=topic.getId() %>">下一页</a>
+		<a href="DetailControl?page=<%=prep%>&boardid=<%=board.getID()%>&topicid=<%=topic.getId()%>&action=show">上一页</a>|
+		<a href="DetailControl?page=<%=nextp%>&boardid=<%=board.getID() %>&topicid=<%=topic.getId()%>&action=show">下一页</a>
 	</DIV>
 </DIV>
 

@@ -218,5 +218,64 @@ public class CommentDAO extends DAO
 		}
 		return issuccess;
 	}
+	/**
+	 * 计算分页大小
+	 * @param pageSize
+	 * @return
+	 */
+	public int getPageCount(int pageSize)
+	{
+		int total =getCountByPostId();
+		int pagecount;
+		/*if(total%pageSize==0)
+		{
+			pagecount=total/pageSize;
+			
+		}
+		else {
+			pagecount=total/pageSize+1;
+		}*/
+		pagecount =(int)Math.ceil(1.0*total/pageSize);
+		return pagecount;
+	}
+	/**
+	 * 分页加载评论
+	 * @param pageNo 当前页
+	 * @param pageSize 每页显示多少条数据
+	 * @return
+	 */
+	public ArrayList<Comment> getPageComment(int pageNo,int pageSize)
+	{
+		ArrayList<Comment> list=new ArrayList<>();
+		  String sql="select * from(select * from t_hlbbs_comment as thc where thc.intPostsId=?)temp_table limit ?,?";
+		  try {
+			pStatement=m_con.prepareStatement(sql);
+			pStatement.setInt(1, comment.getPostsId());
+			pStatement.setInt(2, pageNo);
+			pStatement.setInt(3, pageSize);
+			rSet=pStatement.executeQuery();
+			while(rSet.next())
+			{
+				Comment com = new Comment();
+				com.setId(rSet.getInt("id"));
+				com.setUserId(rSet.getInt("intUserId"));
+				com.setPostsId(rSet.getInt("intPostsId"));
+				com.setComTime(rSet.getString("dtmComTime"));
+				com.setContent(rSet.getString("nvcContent"));
+				com.setBuildingNum(rSet.getInt("intBuildingNum"));
+				com.setTitle(rSet.getString("nvcTitle"));
+				list.add(com);
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			this.ClosePreStatement(pStatement);
+			this.CloseResultSet(rSet);
+		}
+		return list;
+	}
+	
 
 }

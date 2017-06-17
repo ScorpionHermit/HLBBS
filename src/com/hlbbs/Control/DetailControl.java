@@ -57,7 +57,7 @@ if(action.equals("show"))
 
 		int boardId= Integer.parseInt(request.getParameter("boardid").toString());  // 取得版块id
 		int  topicId= Integer.parseInt(request.getParameter("topicid").toString());  // 取得帖子id
-		int p = Integer.parseInt(request.getParameter("page").toString());
+		int pageNo = Integer.parseInt(request.getParameter("page").toString());
 		board.setID(boardId);
 		topic.setId(topicId);
 		comment.setPostsId(topicId);
@@ -72,23 +72,21 @@ if(action.equals("show"))
 		UserDAO  userDao   = new UserDAO(user);      // 得到用户Dao的实例
 		userDao.findUserById();              // 取得主题作者
 		//System.out.println(topicuser.getName());
-		ArrayList<Comment>  listReply = commentDao.searchByPostsId();           // 取得该主题的回复列表
-		int     prep       = p;                                                   // 上一页
-		int     nextp      = p;                                                   // 下一页
-		if(listReply.size()==10) {
-			nextp = p+1;
-		}
-		if( p>1 ){
-			prep = p-1;
-		}
+		int pagecount =commentDao.getPageCount(5);
+	//	ArrayList<Comment>  listReply = commentDao.searchByPostsId();           // 取得该主题的回复列表
+		ArrayList<Comment> listReply =commentDao.getPageComment(pageNo, 5);
+		
+		 int pagePrev=pageNo>1?pageNo-1:1;//上一页
+         int pageNext=pageNo<pagecount?pageNo+1:pagecount;//下一页
+		System.out.println("当前页:"+pageNo+" 数据行数:"+listReply.size()+"总页数:"+pagecount);
 		
 		request.setAttribute("topicuser", user);
 		request.setAttribute("topic",topic);
 		request.setAttribute("board", board);
 		request.setAttribute("listReply", listReply);
-		request.setAttribute("prep", prep);
-		request.setAttribute("nextp", nextp);
-		request.setAttribute("page", p);
+		request.setAttribute("prep", pagePrev);
+		request.setAttribute("nextp", pageNext);
+		request.setAttribute("page", pageNo);
 	}
 
 }

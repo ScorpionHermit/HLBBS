@@ -40,7 +40,7 @@ CommentDAO cDAO = new CommentDAO(comment);
 
 <body>
 <div>
-	<img src="image/logo.gif">
+	<img  style="width:250px" src="image/logo.png">
 </div>
 <!--      用户信息、登录、注册        -->
 <%
@@ -105,7 +105,7 @@ User loginUser = (User)session.getAttribute("user");
 			<tr class="tr3">
 				<td><img src="image/topic.gif" border=0></td>
 				<td style="font-size: 15px">
-					<a href="detail.jsp?page=1&boardid=<%=sectionID %>&topicid=<%=p.getId() %>"><%=p.getTitle() %></a>
+					<a href="DetailControl?page=1&boardid=<%=sectionID %>&topicid=<%=p.getId() %>&action=show"><%=p.getTitle() %></a>
 				</td>
 				<td align="center"><%=u.getName() %></td>
 				<td align="center"><%=commentCount %></td>

@@ -48,7 +48,7 @@
 	</head>
 	<body>
 		<div>
-			<img src="image/logo.gif">
+			<img  style="width:250px" src="image/logo.png">
 		</div>
 <!--      用户信息、登录、注册        -->
 <%
@@ -64,7 +64,7 @@
 %>
 		<div class="h">
 			您好：　<%=loginUser.getName() %>
-			&nbsp;| &nbsp; <a href="manage/dologout.jsp">登出</a> |
+			&nbsp;| &nbsp; <a href="LoginoutControl">登出</a> |
 		</div>
 
 <%

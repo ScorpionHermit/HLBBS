@@ -15,7 +15,7 @@ String path = request.getContextPath();
 
 <BODY>
 <DIV>
-	<IMG src="<%=path%>/image/logo.png">
+	<IMG  style="width:250px" src="<%=path%>/image/logo.png">
 </DIV>
 
 <!--      用户信息、登录、注册        -->

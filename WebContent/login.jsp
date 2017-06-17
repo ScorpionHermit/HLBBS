@@ -33,7 +33,7 @@ function check() {
 
 <BODY>
 <DIV>
-	<IMG style="width:250px" src="image/logo.gif">
+	<IMG style="width:250px" src="image/logo.png">
 </DIV>
 <!--      用户信息、登录、注册        -->
 <%
@@ -49,7 +49,7 @@ if(request.getSession().getAttribute("user") == null){
 %>
 	<DIV class="h">
 		您好：　<%=loginUser.getName() %>
-		&nbsp;| &nbsp; <A href="manage/doLogout.jsp">登出</A> |
+		&nbsp;| &nbsp; <a href="LoginoutControl">登出</A> |
 	</DIV>
 
 <%
