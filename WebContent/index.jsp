@@ -50,7 +50,7 @@
 		&nbsp;| &nbsp; <a href="LoginoutControl">登出</a> |
 		&nbsp; <a href="user.jsp">我的空间</a> |
 	<%
-		if(user.getRoleType() == Role.WebManager)
+		if(Role.isWebManager(user.getRoleType()))
 		{
 	%>
 		&nbsp; <a href="manager/sectionmanager.jsp">论坛管理</a> |

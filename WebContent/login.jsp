@@ -33,7 +33,7 @@ function check() {
 
 <BODY>
 <DIV>
-	<IMG style="width:250px" src="image/logo.gif">
+	<IMG style="width:250px" src="image/logo.png">
 </DIV>
 <!--      用户信息、登录、注册        -->
 <%

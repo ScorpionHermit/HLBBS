@@ -40,7 +40,7 @@ CommentDAO cDAO = new CommentDAO(comment);
 
 <body>
 <div>
-	<img src="image/logo.gif">
+	<img style="width:250px" src="image/logo.png">
 </div>
 <!--      用户信息、登录、注册        -->
 <%
