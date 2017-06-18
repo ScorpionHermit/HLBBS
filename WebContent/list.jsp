@@ -79,8 +79,8 @@ User loginUser = (User)session.getAttribute("user");
 	</div>
 <!--         翻 页         -->
 	<div>
-		<a href="list.jsp?page=<%=1%>&boardid=<%=sectionID %>">上一页</a>|
-		<a href="list.jsp?page=<%=1%>&boardid=<%=sectionID %>">下一页</a>
+		<a href="list.jsp?page=<%=0%>&boardid=<%=sectionID %>">上一页</a>|
+		<a href="list.jsp?page=<%=0%>&boardid=<%=sectionID %>">下一页</a>
 	</div>
 
 	<div class="t">
@@ -107,7 +107,7 @@ User loginUser = (User)session.getAttribute("user");
 			<tr class="tr3">
 				<td><img src="image/topic.gif" border=0></td>
 				<td style="font-size: 15px">
-					<a href="DetailControl?page=1&boardid=<%=sectionID %>&topicid=<%=p.getId() %>&action=show"><%=p.getTitle() %></a>
+					<a href="DetailControl?page=0&boardid=<%=sectionID %>&topicid=<%=p.getId() %>&action=show"><%=p.getTitle() %></a>
 				</td>
 				<td align="center"><%=u.getName() %></td>
 				<td align="center"><%=commentCount %></td>
@@ -119,8 +119,8 @@ User loginUser = (User)session.getAttribute("user");
 	</div>
 <!--            翻 页          -->
 	<div>
-		<a href="list.jsp?page=<%=1%>&boardid=<%=sectionID %>">上一页</a>|
-		<a href="list.jsp?page=<%=1%>&boardid=<%=sectionID %>">下一页</a>
+		<a href="list.jsp?page=<%=0%>&boardid=<%=sectionID %>">上一页</a>|
+		<a href="list.jsp?page=<%=0%>&boardid=<%=sectionID %>">下一页</a>
 	</div>
 </div>
 <!--             声 明          -->

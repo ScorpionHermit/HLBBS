@@ -83,7 +83,7 @@ if(session.getAttribute("user") == null){
 	
 	<!--      主题        -->
 	<%
-	if(p==1){ 
+	if(p==0){ 
 	%>
 	<DIV class="t">
 		<TABLE style="BORDER-TOP-WIDTH: 0px; TABLE-LAYOUT: fixed" cellSpacing="0" cellPadding="0" width="100%">
