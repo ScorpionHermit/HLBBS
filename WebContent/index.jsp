@@ -86,9 +86,9 @@
 		<!--      主体        -->
 		<div class="t">
 			<table cellspacing="0" cellpadding="0" width="100%">
-				<tr class="tr2" align="center">
+				<tr class="tr2" align="center" style="font-family:'Youyuan'">
 					<td colspan="2">论坛</td>
-					<td style="width: 5%;">主题帖数</td>
+					<td style="width: 10%;">主题数</td>
 					<td style="width: 25%">最后发表</td>
 				</tr>
 				<!--    版块       -->

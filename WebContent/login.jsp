@@ -8,7 +8,7 @@
 <%@ page language="java" pageEncoding="utf-8"
 	contentType="text/html; charset=utf-8"%>
 <%
-request.setCharacterEncoding("GBK");
+request.setCharacterEncoding("utf-8");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
@@ -17,6 +17,15 @@ request.setCharacterEncoding("GBK");
 <TITLE>荟灵BBS-安徽工业大学</TITLE>
 <META http-equiv=Content-Type content="text/html; charset=utf-8">
 <Link rel="stylesheet" type="text/css" href="style/style.css"/>
+<Link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+<style>
+	table tr
+	{
+		display:block;
+		margin:30px auto;
+		font-family:"Youyuan"
+	}
+</style>
 <script language="javascript">
 function check() {
  if(document.loginForm.uName.value==""){
@@ -56,22 +65,38 @@ if(request.getSession().getAttribute("user") == null){
 }
 %>
 
-<BR/>
+<br/>
 <!--      导航        -->
-<DIV>
-	&gt;&gt;<B><a href="index.jsp">论坛首页</a></B>
-</DIV>
+<div>
+	&gt;&gt;<b><a href="index.jsp">论坛首页</a></b>
+</div>
 <!--      用户登录表单        -->
-<DIV class="t" style="MARGIN-TOP: 15px" align="center">
-	<FORM name="loginForm" onSubmit="return check()" action="DoLogin" method="post">
-		<br/><b>用户名:</b> &nbsp;<INPUT class="input" tabIndex="1"  type="text"      maxLength="20" size="35" name="uName"  style="text-align:center">
-		<br/><b>密　码:</b> &nbsp;<INPUT class="input" tabIndex="2"  type="password"  maxLength="20" size="35" name="uPass"  style="text-align:center">
-		<br/><b>验证码:</b> &nbsp;<INPUT class="input" tabIndex="3"  type="text"  maxLength="10" size="25" name="authimg"  style="text-align:center"><img alt="验证码图片" src="authimg" align="absmiddle" />
-		<br/><br><INPUT class="btn"  tabIndex="6"  type="submit" value="登 录" style="background:#e0f0f9;">
-	</FORM>
-</DIV>
+<div class="t" style="margin-top: 15px" align="center">
+	<form name="loginform" onsubmit="return check()" action="DoLogin" method="post">
+		<div style="border:1px solid black;border-radius:5px;width:400px;margin:20px auto;padding:30px 40px">
+			<table>
+			<tr>
+				<td><span>用户名:</span></td>
+				<td><input class="form-control" tabindex="1"  type="text" style="width:250px" maxlength="20" name="name"></td>
+			</tr>
+			<tr>
+				<td><span>密　码:</span></td>
+				<td><input class="form-control" tabindex="2"  type="password" style="width:250px"  maxlength="20" name="pass"></td>
+			</tr>
+			<tr>
+				<td><span>验证码:</span></td>
+				<td>
+					<input class="form-control" tabindex="3"  type="text" style="width:150px;display:inline-block"  maxlength="10" name="authimg">
+					<img alt="验证码图片" src="authimg" style="margin-left:20px" />
+				</td>
+			</tr>
+			</table>
+			<input class="btn btn-primary"  tabindex="4" style="width:100%"  type="submit" value="登 录">
+		</div>
+	</form>
+</div>
 <!--      声明        -->
-<BR/>
-<CENTER class="gray">2017 MaAnShan AHUT JSJ ZXZ6 Working Team 版权所有</CENTER>
-</BODY>
+<br/>
+<center class="gray">2017-安徽工业大学ZXZ6工作室-版权所有</center>
+</body>
 </HTML>

@@ -10,6 +10,7 @@
 		<title>青鸟学员论坛--注册</title>
 		<meta http-equiv=content-type content="text/html; charset=gbk">
 		<link rel="stylesheet" type="text/css" href="style/style.css"/>
+		<Link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
 		<script type="text/javascript">
 		<%
 			Object obj = request.getAttribute("status");
@@ -45,6 +46,14 @@
  			}
 		}
 		</script>
+		<style>
+			table tr
+			{
+				display:block;
+				margin:30px auto;
+				font-family:"Youyuan"
+			}
+</style>
 	</head>
 	<body>
 		<div>
@@ -81,35 +90,33 @@
 <!--      用户注册表单        -->
 		<div  class="t" style="margin-top: 15px" align="center">
 			<form name="regform" onsubmit="return check()" action="RegisterControl" method="post">
-				<div style="width:400px">
-				<table>
-					<tbody>
+				<div style="border:1px solid black;border-radius:5px;width:700px;margin:20px auto;padding:30px 40px">
+				<table style="margin-left:150px">
 						<tr>
-							<td><span>用户名 </span></td>
-							<td><input class="input" tabindex="1" type="text" maxlength="20" size="35" name="name"></td>
+							<td style="width:60px"><span>用户名 </span></td>
+							<td><input style="width:250px" class="form-control" tabindex="1" type="text" maxlength="20" name="name"></td>
 						</tr>
 						<tr>
-							<td><span>邮箱</span></td>
-							<td><input class="input" tabindex="2" type="text" maxlength="20" size="35" name="email"></td>
+							<td style="width:60px"><span>邮箱</span></td>
+							<td><input style="width:250px" class="form-control" tabindex="2" type="text" maxlength="20" name="email"></td>
 						</tr>
 						<tr>
-							<td><span>密码</span></td> 
-							<td><input class="input" tabindex="3" type="password" maxlength="20" size="40" name="password"></td>
+							<td style="width:60px"><span>密码</span></td> 
+							<td><input style="width:250px" class="form-control" tabindex="3" type="password" maxlength="20" name="password"></td>
 						</tr>
 						<tr>
-							<td><span>重复密码 </span></td>
-							<td><input class="input" tabindex="4" type="password" maxlength="20" size="40" name="repetitivepassword"></td>
+							<td style="width:60px"><span>重复密码 </span></td>
+							<td><input style="width:250px" class="form-control" tabindex="4" type="password" maxlength="20" name="repetitivepassword"></td>
 						</tr>
 						<tr>
-							<td><span>性别 </span></td>
+							<td style="width:60px"><span>性别 </span></td>
 							<td>
+								<input type="radio" name="gender" value="男" checked="checked">男
 								<input type="radio" name="gender" value="女">女
-								<input type="radio" name="gender" value="男" checked="checked" />男
 							</td>
-						</tr>
-					</tbody>				
+						</tr>				
 				</table>
-				</div>
+				
 				<span>请选择头像</span>
 				<br/>
 				<img src="image/head/1.gif"/><input type="radio" name="head" value="1.gif" checked="checked">
@@ -130,7 +137,8 @@
 				<img src="image/head/14.gif"/><input type="radio" name="head" value="14.gif">
 				<img src="image/head/15.gif"/><input type="radio" name="head" value="15.gif">
 				<br/>
-					<input class="btn" tabindex="4" type="submit" value="注 册">
+					<input style="margin-top:50px;width:60%" class="btn btn-primary" tabindex="4" type="submit" value="注 册">
+				</div>
 			</form>
 		</div>
 <!--      声明        -->

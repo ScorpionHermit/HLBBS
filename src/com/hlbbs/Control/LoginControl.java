@@ -31,11 +31,18 @@ public class LoginControl extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+request.setCharacterEncoding("utf-8");
 		
 		User u = new User();
-		String name = request.getParameter("uName");
-		String pwd = request.getParameter("uPass");
+		String name = request.getParameter("name");
+		String pwd = request.getParameter("pass");
 		u.setName(name);
 		
 		String msg = "";
@@ -58,14 +65,6 @@ public class LoginControl extends HttpServlet {
 		}
 		
 		request.getRequestDispatcher("login.jsp").forward(request,response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

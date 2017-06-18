@@ -36,6 +36,7 @@ CommentDAO cDAO = new CommentDAO(comment);
 <title>青鸟学员论坛--帖子列表</title>
 <meta http-equiv=content-type content="text/html; charset=gbk">
 <link rel="stylesheet" type="text/css" href="style/style.css" />
+<Link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
 </head>
 
 <body>
@@ -67,12 +68,10 @@ User loginUser = (User)session.getAttribute("user");
 <!--      主体        -->
 <div>
 <!--      导航        -->
-	<br/>
-	<div>
+	<div style="font-size:14px;margin:5px auto">
 		&gt;&gt;<b><a href="index.jsp">论坛首页</a></b>&gt;&gt;
 		<b><a href="list.jsp?page=1&boardid=<%=sectionID %>"><%=section.getNvcSectionName() %></a></b>
 	</div>
-	<br/>
 <!--      新帖        -->
 	<div>
 		<a href="post.jsp?post=newtopic&boardid=<%=sectionID %>"><img src="image/post.gif" border="0"></a>
@@ -84,17 +83,16 @@ User loginUser = (User)session.getAttribute("user");
 	</div>
 
 	<div class="t">
-		<table cellspacing="0" cellpadding="0" width="100%">		
-			<tr>
-				<th class="h" style="width: 100%" colspan="4"><span>&nbsp;</span></th>
-			</tr>
+		<table class="table table-hover" width="100%">		
 <!--       表 头           -->
+		<thead>
 			<tr class="tr2">
 				<td>&nbsp;</td>
 				<td style="width: 80%" align="center">文章</td>
 				<td style="width: 10%" align="center">作者</td>
 				<td style="width: 10%" align="center">回复</td>
 			</tr>
+		</thead>
 <!--         帖子列表        -->
 			<%
 			for(Post p : posts) 
@@ -104,7 +102,7 @@ User loginUser = (User)session.getAttribute("user");
 				comment.setPostsId(p.getId());
 				int commentCount = cDAO.getCountByPostId();
 			%>
-			<tr class="tr3">
+			<tr>
 				<td><img src="image/topic.gif" border=0></td>
 				<td style="font-size: 15px">
 					<a href="DetailControl?page=0&boardid=<%=sectionID %>&topicid=<%=p.getId() %>&action=show"><%=p.getTitle() %></a>
