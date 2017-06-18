@@ -45,25 +45,29 @@ request.setCharacterEncoding("utf-8");
 		String pwd = request.getParameter("pass");
 		u.setName(name);
 		
-		String msg = "";
-		User     user      = (User)request.getSession().getAttribute("user");        // 从session中取得登录用户
+		String msg = null;
+		User user = (User)request.getSession().getAttribute("user");        // 从session中取得登录用户
 		UserDAO ud = new UserDAO(u);
 		
 		String S1=(String)request.getSession().getAttribute("authCode");
 		String S2=request.getParameter("authimg");
-		if(user==null&&S2.equals(S1)){
-			ud.findUserByName();
-			if( ud.user!=null && ud.user.getPassWord().equals(pwd) ) {
+		
+		if(user==null && S2.equals(S1))
+		{
+			
+			if( ud.findUserByName() && ud.user.getPassWord().equals(pwd) ) 
+			{
 				request.getSession().setAttribute("user", ud.user);                     // 如果查找的用户不为空并且密码正确，保存用户信息
 				response.sendRedirect("index.jsp");                  // 转发请求到首页
 				return;
 			} else {
 				msg = "用户名或密码错误";
 			}
-		} else {
+		} 
+		else
 			msg = "重复登录";
-		}
 		
+		request.setAttribute("msg", msg);
 		request.getRequestDispatcher("login.jsp").forward(request,response);
 	}
 

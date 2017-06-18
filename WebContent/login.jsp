@@ -27,6 +27,16 @@ request.setCharacterEncoding("utf-8");
 	}
 </style>
 <script language="javascript">
+<%
+String msg = (String)request.getAttribute("msg");
+if(msg != null)
+{
+%>
+	alert("<%=msg %>");
+<%
+	request.removeAttribute("msg");
+}
+%>
 function check() {
  if(document.loginForm.uName.value==""){
     alert("用户名不能为空");

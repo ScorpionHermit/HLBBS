@@ -166,13 +166,16 @@ public class UserDAO extends DAO {
      * @param user
      * @return 锟斤拷锟斤拷锟矫伙拷锟斤拷锟斤拷询锟斤拷锟矫伙拷锟斤拷锟斤拷
      */
-    public void findUserByName() {
+    public boolean findUserByName() {
         String sql  = "select * from t_hlbbs_user where nvcNickName=?";
-        try {
+        boolean isSuccess = false;
+        try 
+        {
             pstmt = m_con.prepareStatement(sql);    // 取锟斤拷PreparedStatement锟斤拷锟斤拷
-            pstmt.setString(1, user.getName());             // 锟斤拷锟矫诧拷锟斤拷
+            pstmt.setString(1, user.getName());     // 锟斤拷锟矫诧拷锟斤拷
             rs    = pstmt.executeQuery();          // 执锟斤拷SQL取锟矫斤拷锟斤拷锟�
-            while( rs.next() ) {
+            if( rs.first() ) 
+            {
                 user.setId(rs.getInt("id"));
                 user.setName(rs.getString("nvcNickName"));
                 user.setEmailAddress(rs.getString("nvcEmailAddress"));
@@ -184,6 +187,7 @@ public class UserDAO extends DAO {
                 user.setPersonalizedSignature(rs.getString("nvcPersonalizedSignature"));
                 user.setLevel(rs.getInt("intLevel"));
                 user.setRegistertime(rs.getString("dtmRegTime"));
+                isSuccess = true;
             }
             
         } catch (Exception e) {
@@ -192,7 +196,7 @@ public class UserDAO extends DAO {
           this.CloseResultSet(rs);
           this.ClosePreStatement(pstmt);
         }
-        
+        return isSuccess;
     }
     
     /**
