@@ -76,9 +76,9 @@ if(action.equals("show"))
 	//	ArrayList<Comment>  listReply = commentDao.searchByPostsId();           // 取得该主题的回复列表
 		ArrayList<Comment> listReply =commentDao.getPageComment(pageNo, 5);
 		
-		 int pagePrev=pageNo>1?pageNo-1:1;//上一页
+		 int pagePrev=pageNo>0?pageNo-1:0;//上一页
          int pageNext=pageNo<pagecount?pageNo+1:pagecount;//下一页
-		System.out.println("当前页:"+pageNo+" 数据行数:"+listReply.size()+"总页数:"+pagecount);
+	//	System.out.println("当前页:"+pageNo+" 数据行数:"+listReply.size()+"总页数:"+pagecount);
 		
 		request.setAttribute("topicuser", user);
 		request.setAttribute("topic",topic);

@@ -51,11 +51,12 @@ public class PostControl extends HttpServlet {
 			post.setReplyCount(0);
 			PostDAO postDao  = new PostDAO(post);                        // 得到主题Dao的实例
 			postDao.addPost();                                        // 保存主题帖子
-			
+	
 			user.setIntegral(user.getIntegral()+5);                    //发一次帖子积分加5
 			UserDAO ud = new UserDAO(user);
 			ud.updateUserIntegral();
 			request.getRequestDispatcher("list.jsp?page=1&boardid="+boardId).forward(request,response);    // 跳转
+
 			return;
 		}
 		

@@ -111,7 +111,7 @@ function check(){
 		<!--      导航        -->
 		<DIV>
 			&gt;&gt;<B><a href="index.jsp">论坛首页</a></B>&gt;&gt; <B><a
-				href="list.jsp?page=1&boardid=<%=id%>"><%=section.getNvcSectionName()%></a></B>
+				href="list.jsp?page=0&boardid=<%=id%>"><%=section.getNvcSectionName()%></a></B>
 		</DIV>
 		<BR />
 		<DIV>
