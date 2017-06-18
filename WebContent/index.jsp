@@ -15,19 +15,24 @@
 	Section section = new Section();
 	SectionDAO secDAO = new SectionDAO(section);
 	ArrayList<Section> secs = secDAO.getAllSection();
+	
 %>
 <script type="text/javascript">
    function Sign(){
-	   var isSign = ${isSign};
+	   
+	   var isSign = "${isSign}";
    
-	   if(isSign==true)
+	   if(isSign=="1")
 		   {
 		      alert("签到成功");
+		     
 		   }
-	   else if(isSign==false)
+	   else if(isSign=="0")
 	   {
 		   alert("今日已签到");
+		  
 	   }
+	   return true;
    }
 </script>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
@@ -38,7 +43,7 @@
 <link rel="stylesheet" type="text/css" href="style/style.css" />
 </head>
 
-<body onload="Sign();">
+<body >
 
 	<div>
 		<img style="width:250px" src="image/logo.png">
@@ -63,7 +68,7 @@
 		<a href="user.jsp"><%=user.getName() %></a>
 		&nbsp;|&nbsp; <a href="LoginoutControl">登出</a> |
 		&nbsp;&nbsp;  <a href="user.jsp">我的空间</a> |
-		&nbsp;&nbsp; <a href="SignControl">签到</a> |
+		&nbsp;&nbsp; <a href="SignControl" onclick = "return Sign()">签到</a> |
 	<%
 		if(Role.isWebManager(user.getRoleType()))
 		{

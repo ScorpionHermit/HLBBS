@@ -14,7 +14,7 @@ request.setCharacterEncoding("GBK");
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML>
 <HEAD>
-<TITLE>青鸟学员论坛--登录</TITLE>
+<TITLE>荟灵BBS-安徽工业大学</TITLE>
 <META http-equiv=Content-Type content="text/html; charset=utf-8">
 <Link rel="stylesheet" type="text/css" href="style/style.css"/>
 <script language="javascript">

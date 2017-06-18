@@ -36,7 +36,7 @@ public class SignControl extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		boolean isSign = false;
+		int isSign =0;
 		Sign sign = new Sign();
 		User user = (User)request.getSession().getAttribute("user");
 		sign.setUserId(user.getId());
@@ -50,8 +50,10 @@ public class SignControl extends HttpServlet {
         user.setIntegral(user.getIntegral()+1); 
 		UserDAO ud = new UserDAO(user);
 		ud.updateUserIntegral();
-		isSign = true;
+		isSign = 1;
 		}
+		else
+		{
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         java.util.Date now = new java.sql.Timestamp(new Date().getTime());
         java.util.Date date = new Date();
@@ -66,7 +68,7 @@ public class SignControl extends HttpServlet {
         long hour=(l/(60*60*1000)-day*24);
         long min=((l/(60*1000))-day*24*60-hour*60);
         long s=(l/1000-day*24*60*60-hour*60*60-min*60);
-        System.out.println(""+day+"天"+hour+"小时"+min+"分"+s+"秒");
+        //System.out.println(""+day+"天"+hour+"小时"+min+"分"+s+"秒");
         
         if(day>=1){
         	user.setIntegral(user.getIntegral()+1); 
@@ -74,10 +76,16 @@ public class SignControl extends HttpServlet {
     		ud.updateUserIntegral();
     		
     		sd.updateSign();
-    		isSign = true;
+    		isSign = 1;
     		
         }
-        response.sendRedirect("index.jsp?isSign="+isSign+"");
+		}
+		if(request.getSession().getAttribute("isSign")!=null)
+		{
+			request.getSession().removeAttribute("isSign");
+		}
+        request.getSession().setAttribute("isSign", isSign);
+        request.getRequestDispatcher("index.jsp").forward(request,response);
 		
 		}
 
