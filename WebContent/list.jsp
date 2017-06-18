@@ -33,7 +33,7 @@ CommentDAO cDAO = new CommentDAO(comment);
 <!doctype html public "-//w3c//dtd html 4.01 transitional//en" "http://www.w3c.org/tr/1999/rec-html401-19991224/loose.dtd">
 <html>
 <head>
-<title>青鸟学员论坛--帖子列表</title>
+<title>荟灵BBS--帖子列表</title>
 <meta http-equiv=content-type content="text/html; charset=gbk">
 <link rel="stylesheet" type="text/css" href="style/style.css" />
 <Link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>

@@ -3,6 +3,7 @@ package com.hlbbs.DAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class CommentDAO extends DAO
 	public int addComment()
 	{
 		int result = 0;
-		String sql = "insert into t_hlbbs_comment(intUserId,intPostsId,nvcContent,nvcTitle) values(?,?,?,?)";
+		String sql = "insert into t_hlbbs_comment(intUserId,intPostsId,nvcContent,nvcTitle,dtmFinalReplyTime) values(?,?,?,?,?)";
 		try
 		{
 			pStatement = m_con.prepareStatement(sql);
@@ -30,6 +31,9 @@ public class CommentDAO extends DAO
 			pStatement.setInt(2, comment.getPostsId());
 			pStatement.setString(3, comment.getContent());
 			pStatement.setString(4, comment.getTitle());
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+			java.util.Date date =new java.util.Date();
+			pStatement.setString(5, comment.getFinalreplytime());
 			result = pStatement.executeUpdate();
 
 		} catch (SQLException e)
@@ -46,13 +50,16 @@ public class CommentDAO extends DAO
 	public int editComment()
 	{
 		int result = 0;
-		String sql = "update t_hlbbs_comment set nvcContent=?,nvcTitle=? where id =?";
+		String sql = "update t_hlbbs_comment set nvcContent=?,nvcTitle=?,dtmFinalReplyTime=? where id =?";
 		try
 		{
 			pStatement = m_con.prepareStatement(sql);
 			pStatement.setString(1, comment.getContent());
 			pStatement.setString(2, comment.getTitle());
-			pStatement.setInt(3, comment.getId());
+			
+			pStatement.setString(3, comment.getFinalreplytime());
+			pStatement.setInt(4, comment.getId());
+			
 			result = pStatement.executeUpdate();
 		} catch (SQLException e)
 		{

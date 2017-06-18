@@ -30,7 +30,7 @@ String action_update =request.getParameter("post");
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML>
 <HEAD>
-<TITLE>青鸟学员论坛--<%=action%></TITLE>
+<TITLE>荟灵BBS--<%=action%></TITLE>
 <META http-equiv=Content-Type content="text/html; charset=gbk">
 <Link rel="stylesheet" type="text/css" href="style/style.css" />
 <script type="text/javascript">

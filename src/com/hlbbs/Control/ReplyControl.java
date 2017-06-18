@@ -1,6 +1,9 @@
 package com.hlbbs.Control;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,7 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.hlbbs.DAO.CommentDAO;
+import com.hlbbs.DAO.PostDAO;
+import com.hlbbs.DAO.UserDAO;
 import com.hlbbs.Modal.Comment;
+import com.hlbbs.Modal.Post;
 import com.hlbbs.Modal.User;
 
 /**
@@ -47,7 +53,7 @@ public class ReplyControl extends HttpServlet {
 
 			if (newReply(request, response)) {
 
-				response.sendRedirect(request.getContextPath() + "/DetailControl?page=1&boardid=" + boardId
+				response.sendRedirect(request.getContextPath() + "/DetailControl?page=0&boardid=" + boardId
 						+ "&topicid=" + topicId + "&action=show"); // 跳转
 
 				return;
@@ -59,7 +65,7 @@ public class ReplyControl extends HttpServlet {
 			}
 		} else if (action.equals("deletereply")) {
 			if (deleteReply(request, response)) {
-				response.sendRedirect(request.getContextPath() + "/DetailControl?page=1&boardid=" + boardId
+				response.sendRedirect(request.getContextPath() + "/DetailControl?page=0&boardid=" + boardId
 						+ "&topicid=" + topicId + "&action=show"); // 跳转
 				return;
 			} else {
@@ -87,7 +93,7 @@ public class ReplyControl extends HttpServlet {
 		{
 			if(updateReply(request, response)){
 				
-				response.sendRedirect(request.getContextPath() + "/DetailControl?page=1&boardid=" + boardId
+				response.sendRedirect(request.getContextPath() + "/DetailControl?page=0&boardid=" + boardId
 						+ "&topicid=" + topicId + "&action=show"); // 跳转
 
 				return;
@@ -124,10 +130,33 @@ public class ReplyControl extends HttpServlet {
 			comment.setContent(content);
 			comment.setUserId(user.getId());
 			comment.setPostsId(topicId);
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+			java.util.Date date =new java.util.Date();
+			comment.setFinalreplytime(df.format(date));
 			CommentDAO replyDao = new CommentDAO(comment); // 得到主题Dao的实例
 
 			if (replyDao.addComment() > 0) {
-				return true;
+				Post post =new Post();
+				post.setId(topicId);
+				
+				post.setFinalReplyTime(df.format(date));
+				PostDAO postDAO =new PostDAO(post);
+				if(postDAO.updateFinalReplyTime()>0)
+				{
+					user.setIntegral(user.getIntegral()+2);                    //回复一次加2分
+					UserDAO ud = new UserDAO(user);
+					if(ud.updateUserIntegral())
+					{
+						return true;
+					}
+					else {
+						return false;
+					}
+				
+				}
+				else {
+					return false;
+				}
 
 			} else {
 				return false;

@@ -101,7 +101,7 @@ if(session.getAttribute("user") == null){
 						<%if(topic.getFinalReplyTime()!=null)
 						{
 							%>
-						最后修改时间:[<%=topic.getFinalReplyTime().substring(0,16) %>]
+						最后回复时间:[<%=topic.getFinalReplyTime().substring(0,16) %>]
 						<%} %>
 					</DIV>
 				</TH>

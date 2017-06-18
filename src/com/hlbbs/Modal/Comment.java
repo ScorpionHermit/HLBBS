@@ -10,6 +10,7 @@ public class Comment implements Serializable{
 	private String comTime; //评论时间
 	private int buildingNum; //楼号
 	private String title;
+	private String finalreplytime;  //最后修改时间
 	public int getId() {
 		return id;
 	}
@@ -51,6 +52,12 @@ public class Comment implements Serializable{
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public String getFinalreplytime() {
+		return finalreplytime;
+	}
+	public void setFinalreplytime(String finalreplytime) {
+		this.finalreplytime = finalreplytime;
 	}
 	
 	
